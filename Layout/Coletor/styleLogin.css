@@ -1,0 +1,69 @@
+div {
+    display: block;
+}
+
+.img-logo{
+    width: 80%;
+}
+
+.login-page {
+    background: url(images/fundo_login.jpg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 100%;
+}
+
+.login-page .login-box {
+    width: 970px;
+    height: 518px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    box-shadow: 0px 0px 100px rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+
+.login-page .side-left {
+    float: left;
+    width: 100%;
+    max-width: 450px;
+    background: url(images/fundo_login.jpg);
+    height: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.login-page .side-right {
+    padding: 0 67px;
+    float: left;
+    width: 100%;
+    max-width: 520px;
+    height: 100%;
+    background: url(../images/login-bg.png) no-repeat bottom center;
+}
+
+.login-page .side-left .conteudo {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    width: 360px;
+    max-height: 125px;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.pull-right {
+    float: right !important;
+}
