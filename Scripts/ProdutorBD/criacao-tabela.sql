@@ -1,87 +1,62 @@
-DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
+DROP TABLE Propriedades;
+DROP TABLE Racas;
+DROP TABLE Vacas;
+DROP TABLE Usuarios;
+DROP TABLE Ordenhas;
+DROP TABLE VacasOrdenhadas;
 
-CREATE TABLE IF NOT EXISTS `produtor`.`Vaca` (
-  `idVaca` INT(11) NOT NULL AUTO_INCREMENT,
-  `nomeVaca` VARCHAR(45) NOT NULL,
-  `pesoVaca` FLOAT(11) NOT NULL,
-  `obsVaca` VARCHAR(200) NULL DEFAULT NULL,
-  `idRaca` INT(11) NOT NULL,
-  PRIMARY KEY (`idVaca`),
-  INDEX `fk_Vaca_Raca_idx` (`idRaca` ASC),
-  CONSTRAINT `fk_Vaca_Raca`
-    FOREIGN KEY (`idRaca`)
-    REFERENCES `produtor`.`Raca` (`idRaca`)
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS  Propriedades (
+  id                INT AUTO_INCREMENT,
+  nome              VARCHAR(90) NOT NULL,
+  cnpj              VARCHAR(15) NOT NULL,
+  PRIMARY KEY (id)
+);
 
-CREATE TABLE IF NOT EXISTS `produtor`.`Raca` (
-  `idRaca` INT(11) NOT NULL AUTO_INCREMENT,
-  `descRaca` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idRaca`))
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS  Racas (
+  id                INT AUTO_INCREMENT,
+  nome              VARCHAR(90) NOT NULL,
+  PRIMARY KEY (id)
+);
 
-CREATE TABLE IF NOT EXISTS `produtor`.`Ordenha` (
-  `idOrdenha` INT(11) NOT NULL AUTO_INCREMENT,
-  `vacasOrdenhadas` INT(11) NOT NULL,
-  `data` DATETIME NOT NULL,
-  PRIMARY KEY (`idOrdenha`))
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS  Vacas (
+  id                INT AUTO_INCREMENT,
+  nome              VARCHAR(90)  NOT NULL,
+  peso              DECIMAL      NOT NULL,
+  id_raca           INT          NOT NULL,
+  observacao        VARCHAR(300)     NULL,
+  data_nascimento   DATE         NOT NULL,
+  doente            BIT          NOT NULL,
+  prenha            BIT          NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_Vacas_Racas FOREIGN KEY (id_raca) REFERENCES Racas(id)
+);
 
-CREATE TABLE IF NOT EXISTS `produtor`.`Usuario` (
-  `idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
-  `loginUser` VARCHAR(45) NOT NULL,
-  `nomeUser` VARCHAR(45) NOT NULL,
-  `senhaUser` VARCHAR(15) NOT NULL,
-  PRIMARY KEY (`idUsuario`))
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS  Usuarios (
+  id             INT          AUTO_INCREMENT,
+  login          VARCHAR(90)  NOT NULL,
+  nome           VARCHAR(90)  NOT NULL,
+  senha          VARCHAR(300) NOT NULL,
+  id_propriedade INT          NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_Usuarios_Propriedades FOREIGN KEY (id_propriedade) REFERENCES Propriedades(id)
+);
 
-CREATE TABLE IF NOT EXISTS `produtor`.`VacaOrdenhada` (
-  `idVaca` INT(11) NOT NULL,
-  `idOrdenha` INT(11) NOT NULL,
-  PRIMARY KEY (`idVaca`, `idOrdenha`),
-  INDEX `fk_Vaca_has_Ordenha_Ordenha1_idx` (`idOrdenha` ASC),
-  INDEX `fk_Vaca_has_Ordenha_Vaca1_idx` (`idVaca` ASC),
-  CONSTRAINT `fk_Vaca_has_Ordenha_Vaca1`
-    FOREIGN KEY (`idVaca`)
-    REFERENCES `produtor`.`Vaca` (`idVaca`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Vaca_has_Ordenha_Ordenha1`
-    FOREIGN KEY (`idOrdenha`)
-    REFERENCES `produtor`.`Ordenha` (`idOrdenha`)
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS  Ordenhas (
+  id             INT      NOT NULL,
+  data_hora      DATETIME NOT NULL,
+  id_usuario     INT      NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_Ordenhas_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
+);
 
-CREATE TABLE IF NOT EXISTS `produtor`.`MovimentoOrdenha` (
-  `idMovimentoOrdenha` INT(11) NOT NULL AUTO_INCREMENT,
-  `idOrdenha` INT(11) NOT NULL,
-  PRIMARY KEY (`idMovimentoOrdenha`),
-  INDEX `fk_MovimentoOrdenha_Ordenha1_idx` (`idOrdenha` ASC),
-  CONSTRAINT `fk_MovimentoOrdenha_Ordenha1`
-    FOREIGN KEY (`idOrdenha`)
-    REFERENCES `produtor`.`Ordenha` (`idOrdenha`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS  VacasOrdenhadas (
+  id                INT AUTO_INCREMENT,
+  id_vaca           INT     NOT NULL,
+  id_ordenha        INT     NOT NULL,
+  quantidade_leite  DECIMAL NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_VacasOrdenhadas_Vacas    FOREIGN KEY (id_vaca)    REFERENCES Vacas(id),
+  CONSTRAINT fk_VacasOrdenhadas_Ordenhas FOREIGN KEY (id_ordenha) REFERENCES Ordenhas(id)
+);
 
-CREATE TABLE IF NOT EXISTS `produtor`.`MovimentoColeta` (
-  `idMovimentoColeta` INT(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`idMovimentoColeta`))
-DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `produtor`.`MovimentoTanque` (
-  `data` DATE NOT NULL,
-  `litragemAnterior` DOUBLE NOT NULL,
-  `litragemAtual` DOUBLE NOT NULL,
-  `qtde` DOUBLE NOT NULL,
-  `idOrdenha` INT(11) NOT NULL,
-  `idMovimentoColeta` INT(11) NOT NULL,
-  INDEX `fk_MovimentoTanque_Ordenha1_idx` (`idOrdenha` ASC),
-  INDEX `fk_MovimentoTanque_MovimentoColeta1_idx` (`idMovimentoColeta` ASC),
-  CONSTRAINT `fk_MovimentoTanque_Ordenha1`
-    FOREIGN KEY (`idOrdenha`)
-    REFERENCES `produtor`.`Ordenha` (`idOrdenha`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_MovimentoTanque_MovimentoColeta1`
-    FOREIGN KEY (`idMovimentoColeta`)
-    REFERENCES `produtor`.`MovimentoColeta` (`idMovimentoColeta`)
-DEFAULT CHARACTER SET = utf8;
