@@ -1,58 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dac.coletor.beans;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author joaov
- */
-public class ColetaBean implements Serializable{
+public class ColetaBean implements Serializable {
 
-  private int id;
-  private float quantidade;
-  private Date dataHora; 
-  private PropriedadeBean propriedade;
+    private static final long serialVersionUID = 1L;
 
-  public ColetaBean() {
-  }
+    private int id;
+    private float quantidade;
+    private Date dataHora;
+    private PropriedadeBean propriedade;
 
-  public int getId() {
-    return id;
-  }
+    public ColetaBean() {
+    }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public float getQuantidade() {
-    return quantidade;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public void setQuantidade(float quantidade) {
-    this.quantidade = quantidade;
-  }
+    public float getQuantidade() {
+        return quantidade;
+    }
 
-  public Date getDataHora() {
-    return dataHora;
-  }
+    public void setQuantidade(float quantidade) {
+        this.quantidade = quantidade;
+    }
 
-  public void setDataHora(Date dataHora) {
-    this.dataHora = dataHora;
-  }
+    public Date getDataHora() {
+        return dataHora;
+    }
 
-  public PropriedadeBean getPropriedade() {
-    return propriedade;
-  }
+    public void setDataHora(Date dataHora) {
+        this.dataHora = dataHora;
+    }
 
-  public void setPropriedade(PropriedadeBean propriedade) {
-    this.propriedade = propriedade;
-  }
-  
-  
+    public PropriedadeBean getPropriedade() {
+        return propriedade;
+    }
+
+    public void setPropriedade(PropriedadeBean propriedade) {
+        this.propriedade = propriedade;
+    }
+
 }

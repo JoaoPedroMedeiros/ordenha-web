@@ -1,129 +1,120 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dac.coletor.beans;
 
 import java.io.Serializable;
 
-/**
- *
- * @author joaov
- */
-public class PropriedadeBean implements Serializable{
-  
-  private int id;
-  private String nome;
-  private String cnpj;
-  private String endereco;
-  private String bairro;
-  private String numero;
-  private String complemento;
-  private String proprietario;
-  private String telefone;
-  private String email;
-  private int periodicidade;
-  private CidadeBean cidade;
+public class PropriedadeBean implements Serializable {
 
-  public PropriedadeBean() {
-  }
+    private static final long serialVersionUID = 1L;
+    private int id;
+    private String nome;
+    private String cnpj;
+    private String endereco;
+    private String bairro;
+    private String numero;
+    private String complemento;
+    private String proprietario;
+    private String telefone;
+    private String email;
+    private int periodicidade;
+    private CidadeBean cidade;
 
-  public int getId() {
-    return id;
-  }
+    public PropriedadeBean() {
+    }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public String getNome() {
-    return nome;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
+    public String getNome() {
+        return nome;
+    }
 
-  public String getCnpj() {
-    return cnpj;
-  }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-  public void setCnpj(String cnpj) {
-    this.cnpj = cnpj;
-  }
+    public String getCnpj() {
+        return cnpj;
+    }
 
-  public String getEndereco() {
-    return endereco;
-  }
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
-  public void setEndereco(String endereco) {
-    this.endereco = endereco;
-  }
+    public String getEndereco() {
+        return endereco;
+    }
 
-  public String getBairro() {
-    return bairro;
-  }
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
-  public void setBairro(String bairro) {
-    this.bairro = bairro;
-  }
+    public String getBairro() {
+        return bairro;
+    }
 
-  public String getNumero() {
-    return numero;
-  }
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-  public void setNumero(String numero) {
-    this.numero = numero;
-  }
+    public String getNumero() {
+        return numero;
+    }
 
-  public String getComplemento() {
-    return complemento;
-  }
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-  public void setComplemento(String complemento) {
-    this.complemento = complemento;
-  }
+    public String getComplemento() {
+        return complemento;
+    }
 
-  public String getProprietario() {
-    return proprietario;
-  }
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
-  public void setProprietario(String proprietario) {
-    this.proprietario = proprietario;
-  }
+    public String getProprietario() {
+        return proprietario;
+    }
 
-  public String getTelefone() {
-    return telefone;
-  }
+    public void setProprietario(String proprietario) {
+        this.proprietario = proprietario;
+    }
 
-  public void setTelefone(String telefone) {
-    this.telefone = telefone;
-  }
+    public String getTelefone() {
+        return telefone;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public int getPeriodicidade() {
-    return periodicidade;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public void setPeriodicidade(int periodicidade) {
-    this.periodicidade = periodicidade;
-  }
+    public int getPeriodicidade() {
+        return periodicidade;
+    }
 
-  public CidadeBean getCidade() {
-    return cidade;
-  }
+    public void setPeriodicidade(int periodicidade) {
+        this.periodicidade = periodicidade;
+    }
 
-  public void setCidade(CidadeBean cidade) {
-    this.cidade = cidade;
-  }
-  
-  
+    public CidadeBean getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(CidadeBean cidade) {
+        this.cidade = cidade;
+    }
+
 }
