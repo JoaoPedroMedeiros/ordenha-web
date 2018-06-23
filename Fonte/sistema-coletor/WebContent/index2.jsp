@@ -7,6 +7,6 @@
 </head>
 <body>
     Sistema do Coletor!
-    Logado!
+    Não logado!
 </body>
 </html>
