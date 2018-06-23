@@ -1,67 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dac.produtor.beans;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author joaov
  */
-public class OrdenhaBean implements Serializable{
-  
-  private int id;
-  private int vacas;
-  private Date dataHora;
-  private float total;
-  private UsuarioBean usuario;
+public class OrdenhaBean implements Serializable {
 
-  public OrdenhaBean() {
-  }
+    private static final long serialVersionUID = 1L;
 
-  public int getId() {
-    return id;
-  }
+    private int id;
+    private Date dataHora;
+    private List<VacaBean> vacas;
+    private UsuarioBean usuario;
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public OrdenhaBean() {
+    }
 
-  public int getVacas() {
-    return vacas;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public void setVacas(int vacas) {
-    this.vacas = vacas;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public Date getDataHora() {
-    return dataHora;
-  }
+    public Date getDataHora() {
+        return dataHora;
+    }
 
-  public void setDataHora(Date dataHora) {
-    this.dataHora = dataHora;
-  }
+    public void setDataHora(Date dataHora) {
+        this.dataHora = dataHora;
+    }
 
-  public float getTotal() {
-    return total;
-  }
+    public UsuarioBean getUsuario() {
+        return usuario;
+    }
 
-  public void setTotal(float total) {
-    this.total = total;
-  }
+    public void setUsuario(UsuarioBean usuario) {
+        this.usuario = usuario;
+    }
 
-  public UsuarioBean getUsuario() {
-    return usuario;
-  }
+    public List<VacaBean> getVacas() {
+        return vacas;
+    }
 
-  public void setUsuario(UsuarioBean usuario) {
-    this.usuario = usuario;
-  }
-  
-  
+    public void setVacas(List<VacaBean> vacas) {
+        this.vacas = vacas;
+    }
+
 }

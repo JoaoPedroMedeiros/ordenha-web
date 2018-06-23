@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dac.produtor.beans;
 
 import java.io.Serializable;
@@ -11,30 +6,30 @@ import java.io.Serializable;
  *
  * @author joaov
  */
-public class RacaBean implements Serializable{
-  
-  private int id;
-  private String descricao;
+public class RacaBean implements Serializable {
 
-  public RacaBean() {
-  }
+    private static final long serialVersionUID = 1L;
 
-  public int getId() {
-    return id;
-  }
+    private int id;
+    private String descricao;
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public RacaBean() {
+    }
 
-  public String getDescricao() {
-    return descricao;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
-  }
-  
-  
-  
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
 }

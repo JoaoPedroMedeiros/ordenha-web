@@ -1,94 +1,86 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dac.produtor.beans;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author joaov
- */
-public class VacaBean implements Serializable{
-  
-  private int id;
-  private String nome;
-  private float peso;
-  private String observacao;
-  private Date dataNascimento;
-  private boolean doente;
-  private boolean prenha;
-  private RacaBean raca;
+public class VacaBean implements Serializable {
 
-  public VacaBean() {
-  }
+    private static final long serialVersionUID = 1L;
 
-  public int getId() {
-    return id;
-  }
+    private int id;
+    private String nome;
+    private float peso;
+    private String observacao;
+    private Date dataNascimento;
+    private boolean doente;
+    private boolean prenha;
+    private RacaBean raca;
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public VacaBean() {
+    }
 
-  public String getNome() {
-    return nome;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public float getPeso() {
-    return peso;
-  }
+    public String getNome() {
+        return nome;
+    }
 
-  public void setPeso(float peso) {
-    this.peso = peso;
-  }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-  public String getObservacao() {
-    return observacao;
-  }
+    public float getPeso() {
+        return peso;
+    }
 
-  public void setObservacao(String observacao) {
-    this.observacao = observacao;
-  }
+    public void setPeso(float peso) {
+        this.peso = peso;
+    }
 
-  public Date getDataNascimento() {
-    return dataNascimento;
-  }
+    public String getObservacao() {
+        return observacao;
+    }
 
-  public void setDataNascimento(Date dataNascimento) {
-    this.dataNascimento = dataNascimento;
-  }
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
 
-  public boolean isDoente() {
-    return doente;
-  }
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
 
-  public void setDoente(boolean doente) {
-    this.doente = doente;
-  }
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
-  public boolean isPrenha() {
-    return prenha;
-  }
+    public boolean isDoente() {
+        return doente;
+    }
 
-  public void setPrenha(boolean prenha) {
-    this.prenha = prenha;
-  }
+    public void setDoente(boolean doente) {
+        this.doente = doente;
+    }
 
-  public RacaBean getRaca() {
-    return raca;
-  }
+    public boolean isPrenha() {
+        return prenha;
+    }
 
-  public void setRaca(RacaBean raca) {
-    this.raca = raca;
-  }
-  
-  
+    public void setPrenha(boolean prenha) {
+        this.prenha = prenha;
+    }
+
+    public RacaBean getRaca() {
+        return raca;
+    }
+
+    public void setRaca(RacaBean raca) {
+        this.raca = raca;
+    }
+
 }

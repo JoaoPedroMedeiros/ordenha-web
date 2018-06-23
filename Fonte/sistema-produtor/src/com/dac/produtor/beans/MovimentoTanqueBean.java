@@ -1,41 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dac.produtor.beans;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author joaov
- */
-public class MovimentoTanqueBean implements Serializable{
-  
-  private double quantidade;
-  private Date date;
+public abstract class MovimentoTanqueBean implements Serializable {
 
-  public MovimentoTanqueBean() {
-  }
+    private static final long serialVersionUID = 1L;
 
-  public double getQuantidade() {
-    return quantidade;
-  }
+    private double quantidade;
+    private Date date;
 
-  public void setQuantidade(double quantidade) {
-    this.quantidade = quantidade;
-  }
+    public MovimentoTanqueBean() {
+    }
 
-  public Date getDate() {
-    return date;
-  }
+    public double getQuantidade() {
+        return quantidade;
+    }
 
-  public void setDate(Date date) {
-    this.date = date;
-  }
-  
-  
-  
+    public void setQuantidade(double quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 }
