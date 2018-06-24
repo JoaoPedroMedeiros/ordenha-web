@@ -18,37 +18,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "Login", urlPatterns = { "/Login" })
+@WebServlet(name = "Login", urlPatterns = { "/servlets/login" })
 public class LoginServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NoSuchAlgorithmException {
         HttpSession session = request.getSession();
         session.setAttribute("usuario", null);
+        session.setAttribute("mensagemLogin", null);
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         String login = request.getParameter("email");
         String senha = request.getParameter("password");
+
         try {
-            if (senha == null || login == null) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
-                request.setAttribute("msg", "Usuário/Senha inválidos.");
-                request.setAttribute("page", "index.jsp");
-                rd.forward(request, response);
-                return;
+            if (senha == null || senha.isEmpty() || login == null || login.isEmpty()) {
+                session.setAttribute("mensagemLogin", "Por favor, preencha os campos de login e senha");
+                response.sendRedirect("/sistema-produtor/login/");
+
             }
-            UsuarioBean usuario = usuarioDAO.validarLogin(login, senha);
-            if (usuario == null) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
-                request.setAttribute("msg", "Usuário/Senha inválidos.");
-                request.setAttribute("page", "index.jsp");
-                rd.forward(request, response);
-                return;
-            } else {
-                session.setAttribute("usuario", usuario);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-                rd.forward(request, response);
-                return;
+            else {
+                UsuarioBean usuario = usuarioDAO.validarLogin(login, senha);
+
+                if (usuario == null) {
+                    session.setAttribute("mensagemLogin", "Usu�rio ou senha inv�lidos");
+                    response.sendRedirect("/sistema-produtor/login");
+                }
+                else {
+                    session.setAttribute("usuario", usuario);
+                    response.sendRedirect("/sistema-produtor/home.jsp");
+                }
             }
         } catch (SQLException ex) {
             ErrorHandler.handleException(request, ex);
