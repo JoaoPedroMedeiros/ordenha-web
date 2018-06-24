@@ -154,6 +154,7 @@ public class VacaDAO implements CrudDAO<VacaBean> {
                 vacaBean.setPeso(rs.getFloat("peso"));
                 vacaBean.setDoente(rs.getBoolean("doente"));
                 vacaBean.setPrenha(rs.getBoolean("prenha"));
+                vacaBean.setObservacao(rs.getString("observacao"));
                 
                 racaBean.setId(rs.getInt("id_raca"));
                 racaBean.setDescricao(rs.getString("nm_raca"));

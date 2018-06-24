@@ -22,7 +22,7 @@ import com.dac.produtor.dao.VacaDAO;
 /**
  * Servlet implementation class VacaServlet2
  */
-@WebServlet("/VacaServlet2")
+@WebServlet(name = "Vaca", urlPatterns = { "/servlets/vaca" })
 public class VacaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -51,7 +51,7 @@ public class VacaServlet extends HttpServlet {
                 vacaBean.setId(Integer.parseInt(request.getParameter("id")));
                 vacaBean = vacaDAO.buscarPorId(vacaBean);
 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciar-vacas.jsp");
                 rd.forward(request, response);
                 return;
             } else {
@@ -81,7 +81,8 @@ public class VacaServlet extends HttpServlet {
 
                 vacaBeanList = vacaDAO.listar(vacaBean);
 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciar-vacas.jsp");
+                request.setAttribute("vacaBeanList", vacaBeanList);
                 rd.forward(request, response);
                 return;
             }
