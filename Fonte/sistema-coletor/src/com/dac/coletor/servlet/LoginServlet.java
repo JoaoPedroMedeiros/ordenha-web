@@ -29,26 +29,29 @@ public class LoginServlet extends HttpServlet {
 	  String login = request.getParameter("email");
 	  String senha = request.getParameter("password");
 	  try{
-		if(senha == null || login == null){
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
-	        request.setAttribute("msg", "Usuário/Senha inválidos.");
-	        request.setAttribute("page", "index.jsp");
+		if(senha == null || senha.isEmpty() || login == null || login.isEmpty()){
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+			if(login != null && !login.isEmpty()) {
+			    request.setAttribute("email", login);
+			    request.setAttribute("msg", "Preencha o campo Password");
+			}
 	        rd.forward(request, response);
 	        return;
+		} else {
+    	    UsuarioBean usuario = usuarioDAO.validarLogin(login, senha);
+    	    if(usuario == null){
+    	      RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+    	      request.setAttribute("msg", "Usu�rio/Senha inv�lidos");
+    	      request.setAttribute("email", login);
+    	      rd.forward(request, response);
+    	      return; 
+    	    } else {
+    	      session.setAttribute("usuario", usuario);
+    	      RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+    	      rd.forward(request, response);
+    	      return;             
+    	    }
 		}
-	    UsuarioBean usuario = usuarioDAO.validarLogin(login, senha);
-	    if(usuario == null){
-	      RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
-	      request.setAttribute("msg", "Usuário/Senha inválidos.");
-	      request.setAttribute("page", "index.jsp");
-	      rd.forward(request, response);
-	      return; 
-	    } else {
-	      session.setAttribute("usuario", usuario);
-	      RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-	      rd.forward(request, response);
-	      return;             
-	    }
 	  } catch (SQLException ex) {
 		  ErrorHandler.handleException(request, ex);
 	  }
