@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/*")
-public class AuthenticationFilter implements Filter {
+@WebFilter("/login/index.jsp")
+public class LoginFilter implements Filter {
 
     @Override
     public void destroy() {
@@ -22,30 +22,23 @@ public class AuthenticationFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse respose, FilterChain filter)
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filter)
             throws IOException, ServletException {
-
+        
 //        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 //        HttpSession session = httpServletRequest.getSession();
 //        
-//        if (!httpServletRequest.getRequestURI().contains("sistema-coletor/login") && 
-//                !httpServletRequest.getRequestURI().contains("servlets/login")) {
-//
-//            if (session.getAttribute("usuario") != null) {
-//                filter.doFilter(request, respose);
-//            }
-//            else {
-//                ((HttpServletResponse) respose).sendRedirect("/sistema-coletor/login");
-//            }
+//        if (session.getAttribute("usuario") != null) {
+//            ((HttpServletResponse) response).sendRedirect("/sistema-coletor/home.jsp");
 //        }
 //        else {
-//            filter.doFilter(request, respose);
+//            filter.doFilter(request, response);
 //        }
-        filter.doFilter(request, respose);
+        filter.doFilter(request, response);
     }
 
     @Override
-    public void init(FilterConfig config) throws ServletException {
+    public void init(FilterConfig arg0) throws ServletException {
         
     }
 
