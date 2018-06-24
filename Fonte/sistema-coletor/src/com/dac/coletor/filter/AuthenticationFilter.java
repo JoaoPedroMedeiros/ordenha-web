@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/sistema-coletor/*")
+@WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
     @Override
@@ -25,23 +25,22 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse respose, FilterChain filter)
             throws IOException, ServletException {
 
-//        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-//        HttpSession session = httpServletRequest.getSession();
-//        
-//        if (!httpServletRequest.getRequestURI().contains("sistema-coletor/login") && 
-//                !httpServletRequest.getRequestURI().contains("servlets/login")) {
-//
-//            if (session.getAttribute("usuario") != null) {
-//                filter.doFilter(request, respose);
-//            }
-//            else {
-//                ((HttpServletResponse) respose).sendRedirect("/sistema-coletor/login");
-//            }
-//        }
-//        else {
-//            filter.doFilter(request, respose);
-//        }
-        doFilter(request, respose, filter);
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpSession session = httpServletRequest.getSession();
+        
+        if (!httpServletRequest.getRequestURI().contains("sistema-coletor/login") && 
+                !httpServletRequest.getRequestURI().contains("servlets/login")) {
+            if (session.getAttribute("usuario") != null) {
+                filter.doFilter(request, respose);
+            }
+            else {
+                ((HttpServletResponse) respose).sendRedirect("/sistema-coletor/login");
+            }
+        }
+        else {
+            filter.doFilter(request, respose);
+        }
+//        doFilter(request, respose, filter);
     }
 
     @Override
