@@ -25,16 +25,15 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filter)
             throws IOException, ServletException {
         
-//        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-//        HttpSession session = httpServletRequest.getSession();
-//        
-//        if (session.getAttribute("usuario") != null) {
-//            ((HttpServletResponse) response).sendRedirect("/sistema-coletor/home.jsp");
-//        }
-//        else {
-//            filter.doFilter(request, response);
-//        }
-        filter.doFilter(request, response);
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpSession session = httpServletRequest.getSession();
+        
+        if (session.getAttribute("usuario") != null) {
+            ((HttpServletResponse) response).sendRedirect("/sistema-coletor/home.jsp");
+        }
+        else {
+            filter.doFilter(request, response);
+        }
     }
 
     @Override
