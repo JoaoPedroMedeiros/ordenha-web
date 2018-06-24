@@ -32,26 +32,29 @@ public class LoginServlet extends HttpServlet {
 
         try {
             if (senha == null || senha.isEmpty() || login == null || login.isEmpty()) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/");
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/index.jsp");
                 if (login != null && !login.isEmpty()) {
                     request.setAttribute("email", login);
                     request.setAttribute("msg", "Preencha o campo Password");
                 }
-                rd.forward(request, response);
+//                rd.forward(request, response);
+                response.sendRedirect("/sistema-coletor/login/");
 
             } else {
                 UsuarioBean usuario = usuarioDAO.validarLogin(login, senha);
 
                 if (usuario == null) {
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/");
+//                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/index.jsp");
                     request.setAttribute("msg", "Usuário/Senha inválidos");
                     request.setAttribute("email", login);
-                    rd.forward(request, response);
+//                    rd.forward(request, response);
+                    response.sendRedirect("/sistema-coletor/login/");
 
                 } else {
                     session.setAttribute("usuario", usuario);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
-                    rd.forward(request, response);
+//                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+//                    rd.forward(request, response);
+                    response.sendRedirect("/sistema-coletor/home.jsp");
                 }
             }
         } catch (SQLException ex) {
