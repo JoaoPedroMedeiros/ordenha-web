@@ -14,8 +14,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 
-import com.dac.coletor.beans.ColetaBean;
-import com.dac.coletor.service.ColetasService.ColetasRespose;
 import com.dac.produtor.beans.MovimentoColetaBean;
 import com.dac.produtor.beans.MovimentoOrdenhaBean;
 import com.dac.produtor.beans.MovimentoTanqueBean;
