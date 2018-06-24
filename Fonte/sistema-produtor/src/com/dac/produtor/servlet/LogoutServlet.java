@@ -1,7 +1,6 @@
 package com.dac.produtor.servlet;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +31,7 @@ public class LogoutServlet extends HttpServlet {
 	    HttpSession session = request.getSession();
         if(session != null) {
             session.invalidate();
-            response.sendRedirect("/sistema-coletor/login/");
+            response.sendRedirect("/sistema-produtor/login/");
         }
 	}
 
