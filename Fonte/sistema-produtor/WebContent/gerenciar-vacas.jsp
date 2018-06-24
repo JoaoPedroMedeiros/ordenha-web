@@ -40,7 +40,7 @@
                   <tr>
                     <td>
                       <form action="/sistema-produtor/servlets/vaca" method="get">
-                        input classE="btn" type="submit" value="Alterar" />
+                        <input classE="btn" type="submit" value="Alterar" />
                         <input type="hidden" id="id" name="id" value="${vaca.id}"/>
                       </form>
                     </td>
