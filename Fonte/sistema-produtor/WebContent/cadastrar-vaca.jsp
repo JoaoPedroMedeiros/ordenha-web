@@ -19,6 +19,14 @@
   <div id="conteudo">
     <form action="/sistema-produtor/servlets/vaca" method="post"> 
       <input type="hidden" id="id" name="id" value="${requestScope.vacaBean.id}"/>
+      <c:choose>
+        <c:when test="${requestScope.vacaBean.id != null}">
+              <input type="hidden" id="acao" name="acao" value="alterar"/>
+          </c:when>    
+          <c:otherwise>
+              <input type="hidden" id="acao" name="acao" value="inserir"/>
+          </c:otherwise>
+      </c:choose>
       Nome: <input type="text" id="nome" name="nome" value="${requestScope.vacaBean.nome}"/>
       </br>
       <fmt:formatDate value="${requestScope.vacaBean.dataNascimento}"  
