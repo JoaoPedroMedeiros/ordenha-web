@@ -4,17 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author joaov
- */
 public class OrdenhaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Integer id;
     private Date dataHora;
-    private List<VacaBean> vacas;
+    private List<VacaOrdenhadaBean> vacas;
     private UsuarioBean usuario;
 
     public OrdenhaBean() {
@@ -24,7 +20,7 @@ public class OrdenhaBean implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -44,12 +40,11 @@ public class OrdenhaBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<VacaBean> getVacas() {
+    public List<VacaOrdenhadaBean> getVacas() {
         return vacas;
     }
 
-    public void setVacas(List<VacaBean> vacas) {
+    public void setVacas(List<VacaOrdenhadaBean> vacas) {
         this.vacas = vacas;
     }
-
 }

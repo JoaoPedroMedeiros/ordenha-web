@@ -9,19 +9,19 @@ import java.io.Serializable;
 public class VacaOrdenhadaBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
-            
-    private float quantidadeLeite;
+    private Integer id;
+    private Float quantidadeLeite;
     private VacaBean vaca;
     private OrdenhaBean ordenha;
 
     public VacaOrdenhadaBean() {
     }
 
-    public float getQuantidadeLeite() {
+    public Float getQuantidadeLeite() {
         return quantidadeLeite;
     }
 
-    public void setQuantidadeLeite(float quantidadeLeite) {
+    public void setQuantidadeLeite(Float quantidadeLeite) {
         this.quantidadeLeite = quantidadeLeite;
     }
 
@@ -39,6 +39,14 @@ public class VacaOrdenhadaBean implements Serializable {
 
     public void setOrdenha(OrdenhaBean ordenha) {
         this.ordenha = ordenha;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }

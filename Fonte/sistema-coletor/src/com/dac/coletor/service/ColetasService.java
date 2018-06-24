@@ -47,11 +47,32 @@ public class ColetasService {
             List<ColetaBean> coletas = coletaDAO.listarResumido(cnpj, ano, mes);
 
             // Retorna um status Ok com as coletas no formato JSON
-            return Response.ok(coletas, MediaType.APPLICATION_JSON).build();
+            return Response.ok(ColetasRespose.get(coletas), MediaType.APPLICATION_JSON).build();
         }
         catch (SQLException e) {
             // Se acontecer algum erro, retorna erro 500 (Server error)
             return Response.serverError().build();
+        }
+    }
+    
+    public static class ColetasRespose {
+        
+        private List<ColetaBean> coletas;
+
+        public ColetasRespose(List<ColetaBean> coletas) {
+            this.coletas = coletas;
+        }
+        
+        public List<ColetaBean> getColetas() {
+            return coletas;
+        }
+
+        public void setColetas(List<ColetaBean> coletas) {
+            this.coletas = coletas;
+        }
+        
+        public static ColetasRespose get(List<ColetaBean> coletas) {
+            return new ColetasRespose(coletas); 
         }
     }
 }

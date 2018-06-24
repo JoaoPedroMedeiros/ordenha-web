@@ -9,11 +9,11 @@ public class VacaBean implements Serializable {
 
     private Integer id;
     private String nome;
-    private float peso;
+    private Float peso;
     private String observacao;
     private Date dataNascimento;
-    private boolean doente;
-    private boolean prenha;
+    private Boolean doente;
+    private Boolean prenha;
     private RacaBean raca;
 
     public VacaBean() {
@@ -23,7 +23,7 @@ public class VacaBean implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -35,11 +35,11 @@ public class VacaBean implements Serializable {
         this.nome = nome;
     }
 
-    public float getPeso() {
+    public Float getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(Float peso) {
         this.peso = peso;
     }
 
@@ -59,19 +59,19 @@ public class VacaBean implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public boolean isDoente() {
+    public Boolean isDoente() {
         return doente;
     }
 
-    public void setDoente(boolean doente) {
+    public void setDoente(Boolean doente) {
         this.doente = doente;
     }
 
-    public boolean isPrenha() {
+    public Boolean isPrenha() {
         return prenha;
     }
 
-    public void setPrenha(boolean prenha) {
+    public void setPrenha(Boolean prenha) {
         this.prenha = prenha;
     }
 
