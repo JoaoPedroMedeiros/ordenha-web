@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 
         try {
             if (senha == null || senha.isEmpty() || login == null || login.isEmpty()) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/");
                 if (login != null && !login.isEmpty()) {
                     request.setAttribute("email", login);
                     request.setAttribute("msg", "Preencha o campo Password");
@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
                 UsuarioBean usuario = usuarioDAO.validarLogin(login, senha);
 
                 if (usuario == null) {
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/");
                     request.setAttribute("msg", "Usuário/Senha inválidos");
                     request.setAttribute("email", login);
                     rd.forward(request, response);
