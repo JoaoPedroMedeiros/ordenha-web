@@ -26,7 +26,7 @@
         <li><a href="home.jsp" class="menu-btn"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
         <li><a href="#" class="menu-btn"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Coleta</a></li>
         <li><a href="#" class="menu-btn"><i class="fa fa-clipboard" aria-hidden="true"></i> Gerenciar Propriedades</a></li>
-        <li><a href="#" class="menu-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></li>
+        <li><a href="/sistema-coletor/servlets/logout" class="menu-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></li>
       </ul>
       </nav>
 <form class="form-horizontal">
