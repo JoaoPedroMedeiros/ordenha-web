@@ -10,7 +10,7 @@
     <jsp:include page="common/menu.jsp" />
     
     <div>
-        <h1 class="body">Aqui teremos o registro de coleta</h1>
+        <h1 class="body">Aqui teremos o registro de coletas</h1>
     </div>
 </body>
 </html>
