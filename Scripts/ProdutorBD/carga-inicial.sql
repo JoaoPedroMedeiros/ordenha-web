@@ -2,12 +2,13 @@ INSERT INTO Propriedades (nome, cnpj) VALUES ('Fazenda do meu pai', '96485116000
 
 INSERT INTO Racas (nome) VALUES ('Jersey'), ('Nelore'),('Holandesa');
 
-INSERT INTO Vacas (id_propriedade, nome, peso, id_raca, observacao, data_nascimento, doente, prenha) VALUES (1, 'Rubia', 300.00, 1, null, now(), 1, 1),
-(4, 'Mimosa', 300.00, 3, null, now(), 0, 0),
-(2, 'Malhada', 300.00, 3, null, now(), 0, 0),
-(3, 'Cris', 300.00, 3, null, now(), 0, 0),
-(4, 'Leti', 300.00, 3, null, now(), 0, 0),
-(4, 'Mimi', 300.00, 2, null, now(), 0, 0);
+INSERT INTO Vacas (id_propriedade, nome, peso, id_raca, observacao, data_nascimento, doente, prenha) VALUES 
+(1, 'Rubia', 300.00, 1, null,   '2006-06-25', 0, 0),
+(4, 'Mimosa', 300.00, 3, null,  '2006-06-25', 0, 0),
+(2, 'Malhada', 300.00, 3, null, '2007-02-21', 0, 0),
+(3, 'Cris', 300.00, 3, null,    '2008-06-22', 0, 0),
+(4, 'Leti', 300.00, 3, null,    '2010-05-23', 0, 0),
+(4, 'Mimi', 300.00, 2, null,    '2011-10-24', 0, 0);
 
 INSERT INTO Usuarios (login, nome, senha, id_propriedade) VALUES ('login', 'Joao Pedrão', md5('12345'), 1);
 INSERT INTO Usuarios (login, nome, senha, id_propriedade) VALUES ('arion', 'Arion Kamitani', md5('12345'), 2);

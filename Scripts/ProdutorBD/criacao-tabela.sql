@@ -1,9 +1,10 @@
-DROP TABLE Propriedades;
-DROP TABLE Racas;
-DROP TABLE Vacas;
-DROP TABLE Usuarios;
-DROP TABLE Ordenhas;
 DROP TABLE VacasOrdenhadas;
+DROP TABLE Ordenhas;
+DROP TABLE Vacas;
+DROP TABLE Racas;
+DROP TABLE Usuarios;
+DROP TABLE Propriedades;
+
 
 CREATE TABLE IF NOT EXISTS  Propriedades (
   id                INT AUTO_INCREMENT,
@@ -27,8 +28,10 @@ CREATE TABLE IF NOT EXISTS  Vacas (
   data_nascimento   DATE         NOT NULL,
   doente            BIT          NOT NULL,
   prenha            BIT          NOT NULL,
+  id_propriedade    INT          NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT fk_Vacas_Racas FOREIGN KEY (id_raca) REFERENCES Racas(id)
+  CONSTRAINT fk_Vacas_Racas           FOREIGN KEY (id_raca)        REFERENCES Racas(id),
+  CONSTRAINT fk_Vacas_Propriedades    FOREIGN KEY (id_propriedade) REFERENCES Propriedades(id)
 );
 
 CREATE TABLE IF NOT EXISTS  Usuarios (
@@ -42,15 +45,17 @@ CREATE TABLE IF NOT EXISTS  Usuarios (
 );
 
 CREATE TABLE IF NOT EXISTS  Ordenhas (
-  id             INT      NOT NULL,
+  id             INT      NOT NULL AUTO_INCREMENT,
   data_hora      DATETIME NOT NULL,
   id_usuario     INT      NOT NULL,
+  id_propriedade INT      NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT fk_Ordenhas_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
+  CONSTRAINT fk_Ordenhas_Usuarios     FOREIGN KEY (id_usuario)     REFERENCES Usuarios(id),
+  CONSTRAINT fk_Ordenhas_Propriedades FOREIGN KEY (id_propriedade) REFERENCES Propriedades(id)
 );
 
 CREATE TABLE IF NOT EXISTS  VacasOrdenhadas (
-  id                INT AUTO_INCREMENT,
+  id                INT     AUTO_INCREMENT,
   id_vaca           INT     NOT NULL,
   id_ordenha        INT     NOT NULL,
   quantidade_leite  DECIMAL NOT NULL,
