@@ -28,8 +28,9 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpSession session = httpServletRequest.getSession();
         
-        if (!httpServletRequest.getRequestURI().contains("sistema-coletor/login") && 
-                !httpServletRequest.getRequestURI().contains("servlets/login")) {
+        if (!httpServletRequest.getRequestURI().contains("sistema-coletor/login") 
+            && !httpServletRequest.getRequestURI().contains("servlets/login")
+            && !httpServletRequest.getRequestURI().contains("/rest/coletas")) {
             if (session.getAttribute("usuario") != null) {
                 filter.doFilter(request, respose);
             }

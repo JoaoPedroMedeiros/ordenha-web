@@ -120,6 +120,8 @@ public class OrdenhaDAO implements CrudDAO<OrdenhaBean> {
                 while (rsVacas.next()) {
                     VacaOrdenhadaBean vacaOrdenhada = new VacaOrdenhadaBean();
                     vacaOrdenhada.setId(rsVacas.getInt("id"));
+                    vacaOrdenhada.setQuantidadeLeite(rsVacas.getFloat("quantidade_leite"));
+                    vacaOrdenhada.setOrdenha(ordenha);
                     
                     VacaBean vaca = new VacaBean();
                     vaca.setId(rsVacas.getInt("id_vaca"));
