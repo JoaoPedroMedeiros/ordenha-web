@@ -51,7 +51,8 @@ public class VacaServlet extends HttpServlet {
                 vacaBean.setId(Integer.parseInt(request.getParameter("id")));
                 vacaBean = vacaDAO.buscarPorId(vacaBean);
 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciar-vacas.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrar-vaca.jsp");
+                request.setAttribute("vacaBean", vacaBean);
                 rd.forward(request, response);
                 return;
             } else {

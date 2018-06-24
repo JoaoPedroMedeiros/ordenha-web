@@ -15,7 +15,6 @@
       ${sessionScope.usuario.propriedade.nome}</h1>
   </div>
   <div id="conteudo">
-    <form action="/sistema-produtor/servlets/vaca" method="get">
       <table width="100%">
         <thead>
           <tr>
@@ -28,36 +27,24 @@
           </tr>
         </thead>
         <tbody>
-          <c:forEach items="${requestScope.vacaBeanList}" var="vaca">  
-            <tr>
-              <td align="left"><c:out value="${vaca.nome}" /></td>
-              <td align="left"><c:out value="${vaca.dataNascimento}" /></td>
-              <td align="left"><c:out value="${vaca.peso}" /></td>
-              <td align="left"><c:out value="${vaca.raca.descricao}" /></td>
-              <td align="left"><c:out value="${vaca.observacao}" /></td>
-              <td align="left">
-                <table>
-                  <tr>
-                    <td>
-                      <form action="/sistema-produtor/servlets/vaca" method="get">
-                        <input classE="btn" type="submit" value="Alterar" />
-                        <input type="hidden" id="id" name="id" value="${vaca.id}"/>
-                      </form>
-                    </td>
-                    <td>
-                      <form action="/sistema-produtor/servlets/vaca" method="delete">
-                        <input class="btn" type="submit" value="Excluir" />
-                        <input type="hidden" id="id" name="id" value="${vaca.id}"/>
-                      </form>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
+          <c:forEach items="${requestScope.vacaBeanList}" var="vaca"> 
+            <form action="/sistema-produtor/servlets/vaca" method="get"> 
+              <input type="hidden" id="id" name="id" value="${vaca.id}"/>
+              <tr>
+                <td align="left"><c:out value="${vaca.nome}" /></td>
+                <td align="left"><c:out value="${vaca.dataNascimento}" /></td>
+                <td align="left"><c:out value="${vaca.peso}" /></td>
+                <td align="left"><c:out value="${vaca.raca.descricao}" /></td>
+                <td align="left"><c:out value="${vaca.observacao}" /></td>
+                <td align="left">
+                  <input class="btn" type="submit" value="Alterar" />
+                  <input class="btn" type="submit" value="Excluir" />
+                </td>
+              </tr>
+            </form>
           </c:forEach>
         </tbody>
       </table>
-    </form>
   </div>
 </body>
 </html>
