@@ -15,7 +15,7 @@ public class PropriedadeBean implements Serializable {
     private String proprietario;
     private String telefone;
     private String email;
-    private int periodicidade;
+    private Integer periodicidade;
     private CidadeBean cidade;
 
     public PropriedadeBean() {
@@ -101,7 +101,7 @@ public class PropriedadeBean implements Serializable {
         this.email = email;
     }
 
-    public int getPeriodicidade() {
+    public Integer getPeriodicidade() {
         return periodicidade;
     }
 

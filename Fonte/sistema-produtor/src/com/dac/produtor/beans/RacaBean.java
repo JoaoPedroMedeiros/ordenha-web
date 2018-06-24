@@ -10,13 +10,13 @@ public class RacaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    private Integer id;
     private String descricao;
 
     public RacaBean() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

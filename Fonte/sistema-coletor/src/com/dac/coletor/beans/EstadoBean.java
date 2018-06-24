@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class EstadoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id;
+    private Integer id;
     private String nome;
     private String sigla;
 
     public EstadoBean() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

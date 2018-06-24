@@ -7,7 +7,7 @@ public class VacaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    private Integer id;
     private String nome;
     private float peso;
     private String observacao;
@@ -19,7 +19,7 @@ public class VacaBean implements Serializable {
     public VacaBean() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

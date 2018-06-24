@@ -12,7 +12,7 @@ public class OrdenhaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    private Integer id;
     private Date dataHora;
     private List<VacaBean> vacas;
     private UsuarioBean usuario;
@@ -20,7 +20,7 @@ public class OrdenhaBean implements Serializable {
     public OrdenhaBean() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class UsuarioBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id;
+    private Integer id;
     private String nome;
     private String login;
     private String senha;
@@ -13,7 +13,7 @@ public class UsuarioBean implements Serializable {
     public UsuarioBean() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
