@@ -3,6 +3,8 @@ package com.dac.produtor.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,7 +22,7 @@ import com.dac.produtor.beans.MovimentoTanqueBean;
 import com.dac.produtor.beans.OrdenhaBean;
 import com.dac.produtor.dao.OrdenhaDAO;
 
-@WebServlet(name = "Ordenha", urlPatterns = {"/Ordenha"})
+@WebServlet(name = "MovimentoTanque", urlPatterns = {"/servlets/movimento-tanque"})
 public class MovimentoTanqueServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -30,14 +32,16 @@ public class MovimentoTanqueServlet extends HttpServlet {
         String ano = req.getParameter("ano");
         String mes = req.getParameter("mes");
         
-        if (ano == null || mes == null) {
-            resp.sendError(400, "Ano e mês precisam ser preenchidos");
-            return;
+        if (ano == null || ano.isEmpty()) {
+            ano = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        }
+        if (mes == null || mes.isEmpty()) {
+            mes = String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1);
         }
             
         List<OrdenhaBean> ordenhas;
         try {
-            ordenhas = new OrdenhaDAO(1).listarPorMes(Integer.valueOf(ano), Integer.valueOf(mes));
+            ordenhas = new OrdenhaDAO(4).listarPorMes(Integer.valueOf(ano), Integer.valueOf(mes));
         }
         catch (NumberFormatException e) {
             resp.setStatus(400);
@@ -64,12 +68,14 @@ public class MovimentoTanqueServlet extends HttpServlet {
     
             ColetasRespose coletasResponse = 
                 client
-                    .target("http://localhost:8080/sistema-coletor/rest/coletas?cnpj=12345&ano=2018&mes=6")
+                    .target(String.format("http://localhost:8080/sistema-coletor/rest/coletas?cnpj=%s&ano=%s&mes=%s", "70987637000107", ano, mes))
                     .request(MediaType.APPLICATION_JSON)
                     .get(ColetasRespose.class);
             
-            if (coletasResponse != null && coletasResponse.getColetas() != null)
+            if (coletasResponse != null && coletasResponse.getColetas() != null) {
                 movimentos.addAll(coletasResponse.getColetas());
+                       
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -78,7 +84,12 @@ public class MovimentoTanqueServlet extends HttpServlet {
             return;
         }
         
-        System.out.println(movimentos);
+        Collections.sort(movimentos, (m1, m2) -> m1.getDataHora().compareTo(m2.getDataHora()) * - 1);
+        
+        req.setAttribute("movimentos", movimentos);
+        req.setAttribute("ano", ano);
+        req.setAttribute("mes", mes);
+        req.getRequestDispatcher("/linha-do-tempo.jsp").forward(req, resp);
     }
     
     public static class ColetasRespose {

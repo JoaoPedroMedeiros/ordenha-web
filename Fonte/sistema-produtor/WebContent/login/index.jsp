@@ -27,11 +27,11 @@
             <form action="/sistema-produtor/servlets/login" method="post" class="col-sm-4 col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+                    <input id="email" type="text" class="form-control" name="email" placeholder="E-mail">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Senha">
                 </div>
                 <p style="color: red;"><%= session.getAttribute("mensagemLogin") != null ? session.getAttribute("mensagemLogin") : "" %></p>
                 <div class="pull-left">
