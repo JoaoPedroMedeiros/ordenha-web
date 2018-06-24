@@ -19,6 +19,6 @@
         <li><a href="/sistema-produtor/linha-do-tempo.jsp" class="menu-btn"><i class="fa fa-calendar-o" aria-hidden="true"></i> Linha do tempo</a></li>
         <li><a href="/sistema-produtor/cadastro-ordenha.jsp" class="menu-btn"><i class="fa fa-plus" aria-hidden="true"></i> Cadastrar Ordenha</a></li>
         <li><a href="/sistema-produtor/gerenciar-vacas.jsp" class="menu-btn"><i class="fa fa-clipboard" aria-hidden="true"></i> Gerenciar vacas</a></li>
-        <li><a href="#" class="menu-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></li>
+        <li><a href="/sistema-produtor/servlets/logout" class="menu-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></li>
     </ul>
 </nav>

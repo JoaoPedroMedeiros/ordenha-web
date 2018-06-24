@@ -10,7 +10,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,11 +41,11 @@ public class LoginServlet extends HttpServlet {
 
                 if (usuario == null) {
                     session.setAttribute("mensagemLogin", "Usuário ou senha inválidos");
-                    response.sendRedirect("/sistema-produtor/login");
+                    response.sendRedirect("/sistema-produtor/login/");
                 }
                 else {
                     session.setAttribute("usuario", usuario);
-                    response.sendRedirect("/sistema-produtor/home.jsp");
+                    response.sendRedirect("/sistema-produtor/linha-do-tempo.jsp");
                 }
             }
         } catch (SQLException ex) {

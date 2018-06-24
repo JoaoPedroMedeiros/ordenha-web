@@ -1,7 +1,6 @@
 package com.dac.coletor.servlet;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
