@@ -152,8 +152,8 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
             PreparedStatementHelper statementHelper = new PreparedStatementHelper(
                     "SELECT p.*, c.id AS id_cidade, c.nome AS nm_cidade, e.id AS id_estado, e.nome AS nm_estado, e.sigla FROM propriedades p "
                             + "INNER JOIN cidades c ON c.id = p.id_cidade "
-                            + "INNER JOIN estados e ON e.id = c.id_estado"
-                            + "WHERE p.id = ?");
+                            + "INNER JOIN estados e ON e.id = c.id_estado "
+                            + "WHERE 1=1 ");
             if(objeto.getId() != null) {
                 statementHelper.setParameter("AND p.id = ?", objeto.getId());
             }
