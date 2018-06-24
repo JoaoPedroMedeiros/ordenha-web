@@ -32,7 +32,7 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="password" type="password" class="form-control" name="password" placeholder="Password">
                     </div>
-                    <p>${requestScope.msg}</p>
+                    <p style="color: red;"><%= session.getAttribute("mensagemLogin") != null ? session.getAttribute("mensagemLogin") : "" %></p>
                     <div class="pull-left">
                         <br/>
                         <br/>
