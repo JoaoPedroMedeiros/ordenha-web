@@ -5600,8 +5600,25 @@ Insert into Cidades (id, nome, uf, id_estado) values (5222302 ,'Vila Propício',
 Insert into Cidades (id, nome, uf, id_estado) values (5300108 ,'Brasília', 'DF', 53);
 
 insert into Propriedades (nome , cnpj, id_cidade, endereco, bairro, numero, complemento, proprietario, telefone, email, periodicidade) VALUES 
-('Fazenda do meu pai', '12129039120390', 4317509, 'endereço', 'jardim das palmeiras', '123', null, 'Joao Farias', '203042304', 'email@email.com', 2);
+('Fazenda do meu pai', '96485116000137', 4317509, 'endereço', 'jardim das palmeiras', '123', null, 'Joao Farias', '203042304', 'email@email.com', 2),
+('Fazenda São Pedro', '03443504000174', 4122404, 'Av. Brasil', 'jardim europa', '200', null, 'Pedro Kamitani', '34093490', 'email@email.com', 2),
+('Fazenda SL', '50782319000194', 5220603, 'Rua Curitiba', 'Eucaliptos', '200', null, 'Camilla Nakonezcny', '34093490', 'email@email.com', 1),
+('Fazenda Joinville', '70987637000107', 4209102, 'Rua São José', 'São Lucas', '200', null, 'João Victor', '993949494', 'email@email.com', 1);
 
-insert into Coletas(id_propriedade, quantidade, data_hora) VALUES (1, 1500, now());
+insert into Coletas(id_propriedade, quantidade, data_hora) VALUES (1, 150, now()),
+(2, 150, now()),
+(3, 300, '2018-05-01 06:05:21'),
+(4, 200, '2018-06-15 06:30:00'),
+(4, 200, '2018-06-16 06:30:00'),
+(4, 200, '2018-06-17 06:30:00'),
+(4, 200, '2018-06-18 06:30:00'),
+(4, 200, '2018-06-19 06:30:00'),
+(4, 200, '2018-06-20 06:30:00'),
+(4, 200, '2018-06-21 06:30:00'),
+(4, 200, '2018-06-22 06:30:00'),
+(4, 200, '2018-06-23 06:30:00'),
+(4, 200, '2018-06-24 06:30:00'),
+(4, 200, '2018-06-25 06:30:00');
 
-INSERT INTO Usuarios (login, nome, senha) VALUES ('login', 'Joao Pedrão', md5('12345'));
+INSERT INTO Usuarios (login, nome, senha) VALUES ('login', 'Joao Pedrão', md5('12345')),
+('arion', 'Arion Kamitani', md5('12345'));
