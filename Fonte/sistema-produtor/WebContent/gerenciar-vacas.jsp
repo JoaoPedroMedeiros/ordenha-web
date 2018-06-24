@@ -15,8 +15,7 @@
       ${sessionScope.usuario.propriedade.nome}</h1>
   </div>
   <div id="conteudo">
-    <form action="/sistema-coletor/servlets/vaca" method="get">
-    <input class="btn" type="button" name="Cadastrar" value="Cadastrar" />
+    <form action="/sistema-produtor/servlets/vaca" method="get">
       <table width="100%">
         <thead>
           <tr>
@@ -37,8 +36,22 @@
               <td align="left"><c:out value="${vaca.raca.descricao}" /></td>
               <td align="left"><c:out value="${vaca.observacao}" /></td>
               <td align="left">
-                <input class="btn" type="button" name="Alterar" value="Alterar" />
-                <input class="btn" type="button" name="Alterar" value="Excluir" />
+                <table>
+                  <tr>
+                    <td>
+                      <form action="/sistema-produtor/servlets/vaca" method="get">
+                        input classE="btn" type="submit" value="Alterar" />
+                        <input type="hidden" id="id" name="id" value="${vaca.id}"/>
+                      </form>
+                    </td>
+                    <td>
+                      <form action="/sistema-produtor/servlets/vaca" method="delete">
+                        <input class="btn" type="submit" value="Excluir" />
+                        <input type="hidden" id="id" name="id" value="${vaca.id}"/>
+                      </form>
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
           </c:forEach>
