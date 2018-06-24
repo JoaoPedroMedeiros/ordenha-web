@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,12 +20,12 @@
     <div class="bg"></div>
     <nav class="menu" id="principal">
       <ul>
-        <li><div class="voltar"><i class=" fa fa-user" aria-hidden="true" ></i> Nome do User</div></li>
+        <li><div class="voltar"><i class=" fa fa-user" aria-hidden="true" ></i> ${sessionScope.usuario.nome}</div></li>
         <li><a href=""  class="menu-btn"><i class="fa fa-chevron-left" aria-hidden="true" ></i> Voltar</a></li>
         <li><a href="#" class="menu-btn"><i class="fa fa-calendar-o" aria-hidden="true"></i> Linha do tempo</a></li>
         <li><a href="#" class="menu-btn"><i class="fa fa-plus" aria-hidden="true"></i> Cadastrar Ordenha</a></li>
         <li><a href="#" class="menu-btn"><i class="fa fa-clipboard" aria-hidden="true"></i> Gerenciar vacas</a></li>
-        <li><a href="#" class="menu-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></li>
+        <li><a href="/sistema-produtor/servlets/logout" class="menu-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></li>
       </ul>
       </nav>
       <div>
