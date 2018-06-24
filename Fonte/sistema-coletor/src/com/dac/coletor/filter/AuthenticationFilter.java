@@ -25,22 +25,23 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse respose, FilterChain filter)
             throws IOException, ServletException {
 
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        HttpSession session = httpServletRequest.getSession();
-        
-        if (!httpServletRequest.getRequestURI().contains("sistema-coletor/login") && 
-                !httpServletRequest.getRequestURI().contains("servlets/login")) {
-
-            if (session.getAttribute("usuario") != null) {
-                filter.doFilter(request, respose);
-            }
-            else {
-                ((HttpServletResponse) respose).sendRedirect("/sistema-coletor/login");
-            }
-        }
-        else {
-            filter.doFilter(request, respose);
-        }
+//        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+//        HttpSession session = httpServletRequest.getSession();
+//        
+//        if (!httpServletRequest.getRequestURI().contains("sistema-coletor/login") && 
+//                !httpServletRequest.getRequestURI().contains("servlets/login")) {
+//
+//            if (session.getAttribute("usuario") != null) {
+//                filter.doFilter(request, respose);
+//            }
+//            else {
+//                ((HttpServletResponse) respose).sendRedirect("/sistema-coletor/login");
+//            }
+//        }
+//        else {
+//            filter.doFilter(request, respose);
+//        }
+        doFilter(request, respose, filter);
     }
 
     @Override
