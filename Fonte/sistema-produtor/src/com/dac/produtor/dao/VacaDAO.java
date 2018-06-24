@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +22,16 @@ public class VacaDAO implements CrudDAO<VacaBean> {
         Connection conn = conexao.conectar();
 
         try {
-            String sql = "INSERT INTO vacas (id, id_raca, nome, data_nascimento, peso, doente, prenha, observacao) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO vacas (id_raca, nome, data_nascimento, peso, doente, prenha, observacao) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(1, objeto.getId());
-            stm.setInt(2, objeto.getRaca().getId());
-            stm.setString(3, objeto.getNome());
-            stm.setDate(4, (Date) objeto.getDataNascimento());
-            stm.setFloat(5, objeto.getPeso());
-            stm.setBoolean(6, objeto.isDoente());
-            stm.setBoolean(7, objeto.isPrenha());
-            stm.setString(8, objeto.getObservacao());
+            stm.setInt(1, objeto.getRaca().getId());
+            stm.setString(2, objeto.getNome());
+            stm.setDate(3, (Date) objeto.getDataNascimento());
+            stm.setFloat(4, objeto.getPeso());
+            stm.setBoolean(5, objeto.isDoente());
+            stm.setBoolean(6, objeto.isPrenha());
+            stm.setString(7, objeto.getObservacao());
             stm.execute();
         } finally {
             conexao.Desconectar(conn);
@@ -49,19 +49,19 @@ public class VacaDAO implements CrudDAO<VacaBean> {
                     + "nome = ?, "
                     + "data_nascimento = ?, "
                     + "peso = ?, "
-                    + "doente = ?, " 
-                    + "prenha = ?, " 
+//                    + "doente = ?, " 
+//                    + "prenha = ?, " 
                     + "observacao = ? " 
                     + "WHERE id = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, objeto.getRaca().getId());
             stm.setString(2, objeto.getNome());
-            stm.setDate(3, (Date) objeto.getDataNascimento());
+            stm.setDate(3, new java.sql.Date(objeto.getDataNascimento().getTime()));
             stm.setFloat(4, objeto.getPeso());
-            stm.setBoolean(5, objeto.isDoente());
-            stm.setBoolean(6, objeto.isPrenha());
-            stm.setString(7, objeto.getObservacao());
-            stm.setInt(8, objeto.getId());
+//            stm.setBoolean(5, objeto.isDoente());
+//            stm.setBoolean(6, objeto.isPrenha());
+            stm.setString(5, objeto.getObservacao());
+            stm.setInt(6, objeto.getId());
             stm.executeUpdate();
         } finally {
             conexao.Desconectar(conn);
@@ -101,7 +101,7 @@ public class VacaDAO implements CrudDAO<VacaBean> {
                 
                 vacaBean.setId(rs.getInt("id"));
                 vacaBean.setNome(rs.getString("nome"));
-                vacaBean.setDataNascimento(rs.getDate("data_nascimento"));
+                vacaBean.setDataNascimento(new Date(rs.getTimestamp("data_nascimento").getTime()));
                 vacaBean.setPeso(rs.getFloat("peso"));
                 vacaBean.setDoente(rs.getBoolean("doente"));
                 vacaBean.setPrenha(rs.getBoolean("prenha"));
@@ -167,6 +167,27 @@ public class VacaDAO implements CrudDAO<VacaBean> {
             conexao.Desconectar(conn);
         }
         return vacaBeanList;
+    }
+    
+    public List<RacaBean> listarRacas(RacaBean objeto) throws SQLException {
+        ConnectionFactory conexao = new ConnectionFactory();
+        Connection conn = conexao.conectar();
+        List<RacaBean> racaBeanList = new ArrayList(); 
+
+        try {
+            String sql = "SELECT * FROM racas";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                RacaBean racaBean = new RacaBean();
+                racaBean.setId(rs.getInt("id"));
+                racaBean.setDescricao(rs.getString("nome"));
+                racaBeanList.add(racaBean);
+            }
+        } finally {
+            conexao.Desconectar(conn);
+        }
+        return racaBeanList;
     }
 
 }

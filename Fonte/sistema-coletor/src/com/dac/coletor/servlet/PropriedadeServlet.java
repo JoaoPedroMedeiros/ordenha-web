@@ -22,7 +22,7 @@ import com.dac.coletor.dao.PropriedadeDAO;
 /**
  * Servlet implementation class PropriedadeServlet
  */
-@WebServlet("/PropriedadeServlet")
+@WebServlet(name = "Propriedade", urlPatterns = { "/servlets/propriedade" })
 public class PropriedadeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +52,8 @@ public class PropriedadeServlet extends HttpServlet {
                 propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
                 propriedadeBean = propriedadeDAO.buscarPorId(propriedadeBean);
 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrar-propriedade.jsp");
+                request.setAttribute("propriedadeBean", propriedadeBean);
                 rd.forward(request, response);
                 return;
             } else {
@@ -109,7 +110,8 @@ public class PropriedadeServlet extends HttpServlet {
 
                 propriedadeBeanList = propriedadeDAO.listar(propriedadeBean);
 
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciar-propriedades.jsp");
+                request.setAttribute("propriedadeBeanList", propriedadeBeanList);
                 rd.forward(request, response);
                 return;
             }

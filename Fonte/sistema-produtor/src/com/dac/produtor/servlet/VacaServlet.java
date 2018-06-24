@@ -50,9 +50,13 @@ public class VacaServlet extends HttpServlet {
             if (request.getParameter("id") != null) {
                 vacaBean.setId(Integer.parseInt(request.getParameter("id")));
                 vacaBean = vacaDAO.buscarPorId(vacaBean);
+                
+                List<RacaBean> racaBeanList = new ArrayList();
+                racaBeanList = vacaDAO.listarRacas(racaBean);
 
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrar-vaca.jsp");
                 request.setAttribute("vacaBean", vacaBean);
+                request.setAttribute("racaBeanList", racaBeanList);
                 rd.forward(request, response);
                 return;
             } else {
@@ -125,7 +129,7 @@ public class VacaServlet extends HttpServlet {
             if (request.getParameter("prenha") != null) {
                 vacaBean.setPrenha(Boolean.parseBoolean(request.getParameter("prenha")));
             }
-            if (request.getParameter("observaca") != null) {
+            if (request.getParameter("observacao") != null) {
                 vacaBean.setObservacao(request.getParameter("observacao"));
             }
             if (request.getParameter("id_raca") != null) {
@@ -134,6 +138,17 @@ public class VacaServlet extends HttpServlet {
             vacaBean.setRaca(racaBean);
 
             vacaDAO.alterar(vacaBean);
+            
+            VacaBean vacaBean2 = new VacaBean();
+            RacaBean racaBean2 = new RacaBean();
+            vacaBean2.setRaca(racaBean2);
+            List<VacaBean> vacaBeanList = new ArrayList();
+            vacaBeanList = vacaDAO.listar(vacaBean2);
+
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciar-vacas.jsp");
+            request.setAttribute("vacaBeanList", vacaBeanList);
+            rd.forward(request, response);
+            return;
         } catch (ParseException ex) {
             ex.printStackTrace();
         } catch (SQLException ex) {
