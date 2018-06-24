@@ -1,6 +1,6 @@
 -- Create Table --
 
-CREATE TABLE Estados (
+CREATE TABLE IF NOT EXISTS Estados (
     id       INT          NOT NULL,
     nome     VARCHAR (50) NOT NULL,
     uf       CHAR 	 (2)  NOT NULL,

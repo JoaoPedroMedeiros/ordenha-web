@@ -1,12 +1,13 @@
 CREATE TABLE IF NOT EXISTS Estados (
   id        int               NOT NULL AUTO_INCREMENT,
   nome      varchar(90)       NOT NULL,
-  sigla     varchar(2)        NOT NULL,
+  uf        varchar(2)        NOT NULL,
   PRIMARY KEY (id)
 );
 CREATE TABLE IF NOT EXISTS Cidades (        
   id        int               NOT NULL AUTO_INCREMENT,
   nome      varchar(90)       NOT NULL,
+  uf	 	varchar(2)	  	  	  NOT NULL,
   id_estado int               NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT fk_Cidades_Estados FOREIGN KEY (id_estado) REFERENCES Estados(id)
