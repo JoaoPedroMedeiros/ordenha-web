@@ -1,7 +1,6 @@
 package com.dac.coletor.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +11,7 @@ import com.dac.coletor.beans.CidadeBean;
 import com.dac.coletor.beans.EstadoBean;
 import com.dac.coletor.beans.PropriedadeBean;
 import com.dac.coletor.dao.ConnectionFactory;
+import com.dac.coletor.util.PreparedStatementHelper;
 
 public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
 
@@ -149,11 +149,31 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
         List<PropriedadeBean> propriedadeBeanList = new ArrayList();
 
         try {
-            String sql = "SELECT v.*, r.id AS id_raca, r.nome AS nm_raca FROM vacas v "
-                    + "INNER JOIN racas r ON r.id = v.id_raca "
-                    + "WHERE 1=1 ";
-            PreparedStatement stm = conn.prepareStatement(sql);
-                
+            PreparedStatementHelper statementHelper = new PreparedStatementHelper(
+                    "SELECT p.*, c.id AS id_cidade, c.nome AS nm_cidade, e.id AS id_estado, e.nome AS nm_estado, e.sigla FROM propriedades p "
+                            + "INNER JOIN cidades c ON c.id = p.id_cidade "
+                            + "INNER JOIN estados e ON e.id = c.id_estado"
+                            + "WHERE p.id = ?");
+            if(objeto.getId() != null) {
+                statementHelper.setParameter("AND p.id = ?", objeto.getId());
+            }
+            if(objeto.getNome() != null) {
+                statementHelper.setParameter("AND upper(p.nome) = ?", objeto.getNome().toUpperCase());
+            }
+            if(objeto.getCnpj() != null) {
+                statementHelper.setParameter("AND upper(p.cnpj) = ?", objeto.getCnpj().toUpperCase());
+            }
+            if(objeto.getEmail() != null) {
+                statementHelper.setParameter("AND upper(p.email) = ?", objeto.getEmail().toUpperCase());
+            }
+            if(objeto.getTelefone() != null) {
+                statementHelper.setParameter("AND upper(p.telefone) = ?", objeto.getTelefone().toUpperCase());
+            }
+            if(objeto.getProprietario() != null) {
+                statementHelper.setParameter("AND upper(p.proprietario) = ?", objeto.getProprietario().toUpperCase());
+            }
+            
+            PreparedStatement stm = statementHelper.prepareStatement(conn);  
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 PropriedadeBean propriedadeBean = new PropriedadeBean();

@@ -11,6 +11,7 @@ import java.util.List;
 import com.dac.produtor.beans.RacaBean;
 import com.dac.produtor.beans.UsuarioBean;
 import com.dac.produtor.beans.VacaBean;
+import com.dac.produtor.util.PreparedStatementHelper;
 
 public class VacaDAO implements CrudDAO<VacaBean> {
 
@@ -121,14 +122,27 @@ public class VacaDAO implements CrudDAO<VacaBean> {
     public List<VacaBean> listar(VacaBean objeto) throws SQLException {
         ConnectionFactory conexao = new ConnectionFactory();
         Connection conn = conexao.conectar();
-        List<VacaBean> vacaBeanList = new ArrayList();
+        List<VacaBean> vacaBeanList = new ArrayList(); 
 
         try {
-            String sql = "SELECT v.*, r.id AS id_raca, r.nome AS nm_raca FROM vacas v "
+            PreparedStatementHelper statementHelper = new PreparedStatementHelper(
+                    "SELECT v.*, r.id AS id_raca, r.nome AS nm_raca FROM vacas v "
                     + "INNER JOIN racas r ON r.id = v.id_raca "
-                    + "WHERE 1=1 ";
-            PreparedStatement stm = conn.prepareStatement(sql);
-                
+                    + "WHERE 1=1 ");
+            if(objeto.getId() != null) {
+                statementHelper.setParameter("AND v.id = ?", objeto.getId());
+            }
+            if(objeto.getNome() != null) {
+                statementHelper.setParameter("AND upper(v.nome) = ?", objeto.getNome().toUpperCase());
+            }
+            if(objeto.getDataNascimento() != null) {
+                statementHelper.setParameter("AND v.data_nascimento = ?", objeto.getDataNascimento());
+            }
+            if(objeto.getRaca().getId() != null) {
+                statementHelper.setParameter("AND r.id = ?", objeto.getRaca().getId());
+            }
+            
+            PreparedStatement stm = statementHelper.prepareStatement(conn);   
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 VacaBean vacaBean = new VacaBean();
