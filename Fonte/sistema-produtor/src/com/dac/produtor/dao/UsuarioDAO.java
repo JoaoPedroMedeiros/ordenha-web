@@ -18,7 +18,10 @@ public class UsuarioDAO {
     String myHash = DatatypeConverter.printHexBinary(digest);
 
     try{
-      String consulta = "SELECT u.*, p.id AS id_propriedade, p.cnpj AS cnpj_propriedade, p.nome AS nm_propriedade FROM usuarios WHERE u.login = ? AND upper(u.senha) = ?";
+      String consulta = "SELECT u.*, p.id AS id_propriedade, p.cnpj AS cnpj_propriedade, p.nome AS nm_propriedade "
+              + "FROM usuarios u "
+              + "INNER JOIN propriedades p ON p.id = u.id_propriedade "
+              + "WHERE u.login = ? AND upper(u.senha) = ?";
       PreparedStatement stm = conn.prepareStatement(consulta);
       stm.setString(1, login);
       stm.setString(2, myHash.toUpperCase());
