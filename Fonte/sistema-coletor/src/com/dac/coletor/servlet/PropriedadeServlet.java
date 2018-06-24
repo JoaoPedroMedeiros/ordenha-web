@@ -48,31 +48,61 @@ public class PropriedadeServlet extends HttpServlet {
         List<PropriedadeBean> propriedadeBeanList = new ArrayList();
 
         try {
-            propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
-            if (propriedadeBean.getId() != null) {
+            if (request.getParameter("id") != null) {
+                propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
                 propriedadeBean = propriedadeDAO.buscarPorId(propriedadeBean);
 
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
                 rd.forward(request, response);
                 return;
             } else {
-                propriedadeBean.setCnpj(request.getParameter("cnpj"));
-                propriedadeBean.setNome(request.getParameter("nome"));
-                propriedadeBean.setEndereco(request.getParameter("endereco"));
-                propriedadeBean.setBairro(request.getParameter("bairro"));
-                propriedadeBean.setNumero(request.getParameter("numero"));
-                propriedadeBean.setComplemento(request.getParameter("complemento"));
-                propriedadeBean.setTelefone(request.getParameter("telefone"));
-                propriedadeBean.setProprietario(request.getParameter("proprietario"));
-                propriedadeBean.setEmail(request.getParameter("email"));
-                propriedadeBean.setPeriodicidade(Integer.parseInt(request.getParameter("periodicidade")));
-
-                estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
-                estadoBean.setNome(request.getParameter("nome_estado"));
-                estadoBean.setSigla(request.getParameter("sigla"));
-
-                cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
-                cidadeBean.setNome(request.getParameter("nome_cidade"));
+                if (request.getParameter("cnpj") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("cnpj"));
+                }
+                if (request.getParameter("nome") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("nome"));
+                }
+                if (request.getParameter("endereco") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("endereco"));
+                }
+                if (request.getParameter("bairro") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("bairro"));
+                }
+                if (request.getParameter("numero") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("numero"));
+                }
+                if (request.getParameter("complemento") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("complemento"));
+                }
+                if (request.getParameter("telefone") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("telefone"));
+                }
+                if (request.getParameter("proprietario") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("proprietario"));
+                }
+                if (request.getParameter("email") != null) {
+                    propriedadeBean.setCnpj(request.getParameter("email"));
+                }
+                if (request.getParameter("periodicidade") != null) {
+                    propriedadeBean.setPeriodicidade(Integer.parseInt(request.getParameter("periodicidade")));
+                }
+                
+                if (request.getParameter("id_estado") != null) {
+                    estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
+                }
+                if (request.getParameter("nome_estado") != null) {
+                    estadoBean.setNome(request.getParameter("nome_estado"));
+                }
+                if (request.getParameter("sigla") != null) {
+                    estadoBean.setNome(request.getParameter("sigla"));
+                }
+                
+                if (request.getParameter("id_cidade") != null) {
+                    cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
+                }
+                if (request.getParameter("nome_cidade") != null) {
+                    cidadeBean.setNome(request.getParameter("nome_cidade"));
+                }
                 cidadeBean.setEstado(estadoBean);
 
                 propriedadeBean.setCidade(cidadeBean);
@@ -101,24 +131,56 @@ public class PropriedadeServlet extends HttpServlet {
         EstadoBean estadoBean = new EstadoBean();
 
         try {
-            propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
-            propriedadeBean.setCnpj(request.getParameter("cnpj"));
-            propriedadeBean.setNome(request.getParameter("nome"));
-            propriedadeBean.setEndereco(request.getParameter("endereco"));
-            propriedadeBean.setBairro(request.getParameter("bairro"));
-            propriedadeBean.setNumero(request.getParameter("numero"));
-            propriedadeBean.setComplemento(request.getParameter("complemento"));
-            propriedadeBean.setTelefone(request.getParameter("telefone"));
-            propriedadeBean.setProprietario(request.getParameter("proprietario"));
-            propriedadeBean.setEmail(request.getParameter("email"));
-            propriedadeBean.setPeriodicidade(Integer.parseInt(request.getParameter("periodicidade")));
-
-            estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
-            estadoBean.setNome(request.getParameter("nome_estado"));
-            estadoBean.setSigla(request.getParameter("sigla"));
-
-            cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
-            cidadeBean.setNome(request.getParameter("nome_cidade"));
+            if (request.getParameter("id") != null) {
+                propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
+            }
+            if (request.getParameter("cnpj") != null) {
+                propriedadeBean.setCnpj(request.getParameter("cnpj"));
+            }
+            if (request.getParameter("nome") != null) {
+                propriedadeBean.setCnpj(request.getParameter("nome"));
+            }
+            if (request.getParameter("endereco") != null) {
+                propriedadeBean.setCnpj(request.getParameter("endereco"));
+            }
+            if (request.getParameter("bairro") != null) {
+                propriedadeBean.setCnpj(request.getParameter("bairro"));
+            }
+            if (request.getParameter("numero") != null) {
+                propriedadeBean.setCnpj(request.getParameter("numero"));
+            }
+            if (request.getParameter("complemento") != null) {
+                propriedadeBean.setCnpj(request.getParameter("complemento"));
+            }
+            if (request.getParameter("telefone") != null) {
+                propriedadeBean.setCnpj(request.getParameter("telefone"));
+            }
+            if (request.getParameter("proprietario") != null) {
+                propriedadeBean.setCnpj(request.getParameter("proprietario"));
+            }
+            if (request.getParameter("email") != null) {
+                propriedadeBean.setCnpj(request.getParameter("email"));
+            }
+            if (request.getParameter("periodicidade") != null) {
+                propriedadeBean.setPeriodicidade(Integer.parseInt(request.getParameter("periodicidade")));
+            }
+            
+            if (request.getParameter("id_estado") != null) {
+                estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
+            }
+            if (request.getParameter("nome_estado") != null) {
+                estadoBean.setNome(request.getParameter("nome_estado"));
+            }
+            if (request.getParameter("sigla") != null) {
+                estadoBean.setNome(request.getParameter("sigla"));
+            }
+            
+            if (request.getParameter("id_cidade") != null) {
+                cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
+            }
+            if (request.getParameter("nome_cidade") != null) {
+                cidadeBean.setNome(request.getParameter("nome_cidade"));
+            }
             cidadeBean.setEstado(estadoBean);
 
             propriedadeBean.setCidade(cidadeBean);
@@ -138,23 +200,53 @@ public class PropriedadeServlet extends HttpServlet {
         EstadoBean estadoBean = new EstadoBean();
 
         try {
-            propriedadeBean.setCnpj(request.getParameter("cnpj"));
-            propriedadeBean.setNome(request.getParameter("nome"));
-            propriedadeBean.setEndereco(request.getParameter("endereco"));
-            propriedadeBean.setBairro(request.getParameter("bairro"));
-            propriedadeBean.setNumero(request.getParameter("numero"));
-            propriedadeBean.setComplemento(request.getParameter("complemento"));
-            propriedadeBean.setTelefone(request.getParameter("telefone"));
-            propriedadeBean.setProprietario(request.getParameter("proprietario"));
-            propriedadeBean.setEmail(request.getParameter("email"));
-            propriedadeBean.setPeriodicidade(Integer.parseInt(request.getParameter("periodicidade")));
-
-            estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
-            estadoBean.setNome(request.getParameter("nome_estado"));
-            estadoBean.setSigla(request.getParameter("sigla"));
-
-            cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
-            cidadeBean.setNome(request.getParameter("nome_cidade"));
+            if (request.getParameter("cnpj") != null) {
+                propriedadeBean.setCnpj(request.getParameter("cnpj"));
+            }
+            if (request.getParameter("nome") != null) {
+                propriedadeBean.setCnpj(request.getParameter("nome"));
+            }
+            if (request.getParameter("endereco") != null) {
+                propriedadeBean.setCnpj(request.getParameter("endereco"));
+            }
+            if (request.getParameter("bairro") != null) {
+                propriedadeBean.setCnpj(request.getParameter("bairro"));
+            }
+            if (request.getParameter("numero") != null) {
+                propriedadeBean.setCnpj(request.getParameter("numero"));
+            }
+            if (request.getParameter("complemento") != null) {
+                propriedadeBean.setCnpj(request.getParameter("complemento"));
+            }
+            if (request.getParameter("telefone") != null) {
+                propriedadeBean.setCnpj(request.getParameter("telefone"));
+            }
+            if (request.getParameter("proprietario") != null) {
+                propriedadeBean.setCnpj(request.getParameter("proprietario"));
+            }
+            if (request.getParameter("email") != null) {
+                propriedadeBean.setCnpj(request.getParameter("email"));
+            }
+            if (request.getParameter("periodicidade") != null) {
+                propriedadeBean.setPeriodicidade(Integer.parseInt(request.getParameter("periodicidade")));
+            }
+            
+            if (request.getParameter("id_estado") != null) {
+                estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
+            }
+            if (request.getParameter("nome_estado") != null) {
+                estadoBean.setNome(request.getParameter("nome_estado"));
+            }
+            if (request.getParameter("sigla") != null) {
+                estadoBean.setNome(request.getParameter("sigla"));
+            }
+            
+            if (request.getParameter("id_cidade") != null) {
+                cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
+            }
+            if (request.getParameter("nome_cidade") != null) {
+                cidadeBean.setNome(request.getParameter("nome_cidade"));
+            }
             cidadeBean.setEstado(estadoBean);
 
             propriedadeBean.setCidade(cidadeBean);
@@ -172,7 +264,9 @@ public class PropriedadeServlet extends HttpServlet {
         PropriedadeBean propriedadeBean = new PropriedadeBean();
         
         try {
-            propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
+            if (request.getParameter("id") != null) {
+                propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
+            }
 
             propriedadeDAO.deletar(propriedadeBean);
         } catch (SQLException ex) {

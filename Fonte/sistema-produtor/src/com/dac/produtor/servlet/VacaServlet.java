@@ -47,22 +47,36 @@ public class VacaServlet extends HttpServlet {
         List<VacaBean> vacaBeanList = new ArrayList();
 
         try {
-            vacaBean.setId(Integer.parseInt(request.getParameter("id")));
-            if (vacaBean.getId() != null) {
+            if (request.getParameter("id") != null) {
+                vacaBean.setId(Integer.parseInt(request.getParameter("id")));
                 vacaBean = vacaDAO.buscarPorId(vacaBean);
 
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index2.jsp");
                 rd.forward(request, response);
                 return;
             } else {
-                vacaBean.setNome(request.getParameter("nome"));
-                vacaBean.setDataNascimento(
-                        new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_nascimento")));
-                vacaBean.setPeso(Float.parseFloat(request.getParameter("peso")));
-                vacaBean.setDoente(Boolean.parseBoolean(request.getParameter("doente")));
-                vacaBean.setPrenha(Boolean.parseBoolean(request.getParameter("prenha")));
-                vacaBean.setObservacao(request.getParameter("observacao"));
-                racaBean.setId(Integer.parseInt(request.getParameter("id_raca")));
+                if (request.getParameter("nome") != null) {
+                    vacaBean.setNome(request.getParameter("nome"));
+                }
+                if (request.getParameter("data_nascimento") != null) {
+                    vacaBean.setDataNascimento(
+                            new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_nascimento")));
+                }
+                if (request.getParameter("peso") != null) {
+                    vacaBean.setPeso(Float.parseFloat(request.getParameter("peso")));
+                }
+                if (request.getParameter("doente") != null) {
+                    vacaBean.setDoente(Boolean.parseBoolean(request.getParameter("doente")));
+                }
+                if (request.getParameter("prenha") != null) {
+                    vacaBean.setPrenha(Boolean.parseBoolean(request.getParameter("prenha")));
+                }
+                if (request.getParameter("observaca") != null) {
+                    vacaBean.setObservacao(request.getParameter("observacao"));
+                }
+                if (request.getParameter("id_raca") != null) {
+                    racaBean.setId(Integer.parseInt(request.getParameter("id_raca")));
+                }
                 vacaBean.setRaca(racaBean);
 
                 vacaBeanList = vacaDAO.listar(vacaBean);
@@ -90,15 +104,31 @@ public class VacaServlet extends HttpServlet {
         RacaBean racaBean = new RacaBean();
 
         try {
-            vacaBean.setId(Integer.parseInt(request.getParameter("id")));
-            vacaBean.setNome(request.getParameter("nome"));
-            vacaBean.setDataNascimento(
-                    new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_nascimento")));
-            vacaBean.setPeso(Float.parseFloat(request.getParameter("peso")));
-            vacaBean.setDoente(Boolean.parseBoolean(request.getParameter("doente")));
-            vacaBean.setPrenha(Boolean.parseBoolean(request.getParameter("prenha")));
-            vacaBean.setObservacao(request.getParameter("observacao"));
-            racaBean.setId(Integer.parseInt(request.getParameter("id_raca")));
+            if (request.getParameter("id") != null) {
+                vacaBean.setId(Integer.parseInt(request.getParameter("id")));
+            }
+            if (request.getParameter("nome") != null) {
+                vacaBean.setNome(request.getParameter("nome"));
+            }
+            if (request.getParameter("data_nascimento") != null) {
+                vacaBean.setDataNascimento(
+                        new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_nascimento")));
+            }
+            if (request.getParameter("peso") != null) {
+                vacaBean.setPeso(Float.parseFloat(request.getParameter("peso")));
+            }
+            if (request.getParameter("doente") != null) {
+                vacaBean.setDoente(Boolean.parseBoolean(request.getParameter("doente")));
+            }
+            if (request.getParameter("prenha") != null) {
+                vacaBean.setPrenha(Boolean.parseBoolean(request.getParameter("prenha")));
+            }
+            if (request.getParameter("observaca") != null) {
+                vacaBean.setObservacao(request.getParameter("observacao"));
+            }
+            if (request.getParameter("id_raca") != null) {
+                racaBean.setId(Integer.parseInt(request.getParameter("id_raca")));
+            }
             vacaBean.setRaca(racaBean);
 
             vacaDAO.alterar(vacaBean);
@@ -117,14 +147,28 @@ public class VacaServlet extends HttpServlet {
         RacaBean racaBean = new RacaBean();
 
         try {
-            vacaBean.setNome(request.getParameter("nome"));
-            vacaBean.setDataNascimento(
-                    new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_nascimento")));
-            vacaBean.setPeso(Float.parseFloat(request.getParameter("peso")));
-            vacaBean.setDoente(Boolean.parseBoolean(request.getParameter("doente")));
-            vacaBean.setPrenha(Boolean.parseBoolean(request.getParameter("prenha")));
-            vacaBean.setObservacao(request.getParameter("observacao"));
-            racaBean.setId(Integer.parseInt(request.getParameter("id_raca")));
+            if (request.getParameter("nome") != null) {
+                vacaBean.setNome(request.getParameter("nome"));
+            }
+            if (request.getParameter("data_nascimento") != null) {
+                vacaBean.setDataNascimento(
+                        new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_nascimento")));
+            }
+            if (request.getParameter("peso") != null) {
+                vacaBean.setPeso(Float.parseFloat(request.getParameter("peso")));
+            }
+            if (request.getParameter("doente") != null) {
+                vacaBean.setDoente(Boolean.parseBoolean(request.getParameter("doente")));
+            }
+            if (request.getParameter("prenha") != null) {
+                vacaBean.setPrenha(Boolean.parseBoolean(request.getParameter("prenha")));
+            }
+            if (request.getParameter("observaca") != null) {
+                vacaBean.setObservacao(request.getParameter("observacao"));
+            }
+            if (request.getParameter("id_raca") != null) {
+                racaBean.setId(Integer.parseInt(request.getParameter("id_raca")));
+            }
             vacaBean.setRaca(racaBean);
 
             vacaDAO.inserir(vacaBean);
@@ -142,7 +186,9 @@ public class VacaServlet extends HttpServlet {
         VacaBean vacaBean = new VacaBean();
 
         try {
-            vacaBean.setId(Integer.parseInt(request.getParameter("id")));
+            if (request.getParameter("id") != null) {
+                vacaBean.setId(Integer.parseInt(request.getParameter("id")));
+            }
 
             vacaDAO.deletar(vacaBean);
         } catch (SQLException ex) {
