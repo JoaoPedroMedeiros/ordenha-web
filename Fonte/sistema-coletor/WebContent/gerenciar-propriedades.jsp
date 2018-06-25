@@ -25,6 +25,7 @@
           <th align="left">Cnpj</th>
           <th align="left">Proprietário</th>
           <th align="left">Endereco</th>
+          <th align="left">Bairro</th>
           <th align="left">Cidade</th>
           <th align="left">Telefone</th>
           <th align="left">Email</th>
@@ -39,7 +40,8 @@
             <td align="left"><c:out value="${propriedade.cnpj}" /></td>
             <td align="left"><c:out value="${propriedade.proprietario}" /></td>
             <td align="left"><c:out value="${propriedade.endereco}, ${propriedade.numero} - ${propriedade.complemento}" /></td>
-            <td align="left"><c:out value="${propriedade.cidade.nome}" /></td>
+            <td align="left"><c:out value="${propriedade.bairro}" /></td>
+            <td align="left"><c:out value="${propriedade.cidade.nome} - ${propriedade.cidade.estado.sigla}" /></td>
             <td align="left"><c:out value="${propriedade.telefone}" /></td>
             <td align="left"><c:out value="${propriedade.email}" /></td>
             <td align="left"><c:out value="${propriedade.periodicidade}" /></td>

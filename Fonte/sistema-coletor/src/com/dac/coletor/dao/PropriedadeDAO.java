@@ -12,7 +12,6 @@ import com.dac.coletor.beans.EstadoBean;
 import com.dac.coletor.beans.PropriedadeBean;
 import com.dac.coletor.dao.ConnectionFactory;
 import com.dac.coletor.util.PreparedStatementHelper;
-import com.dac.produtor.beans.RacaBean;
 
 public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
 
@@ -103,7 +102,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
         try {
             String sql = "SELECT p.*, c.id AS id_cidade, c.nome AS nm_cidade, e.id AS id_estado, e.nome AS nm_estado, e.sigla FROM propriedades p "
                     + "INNER JOIN cidades c ON c.id = p.id_cidade "
-                    + "INNER JOIN estados e ON e.id = c.id_estado"
+                    + "INNER JOIN estados e ON e.id = c.id_estado "
                     + "WHERE p.id = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, objeto.getId());
@@ -121,9 +120,9 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
                 propriedadeBean.setNumero(rs.getString("numero"));
                 propriedadeBean.setComplemento(rs.getString("complemento"));
                 propriedadeBean.setTelefone(rs.getString("telefone"));
+                propriedadeBean.setEmail(rs.getString("email"));
                 propriedadeBean.setProprietario(rs.getString("proprietario"));
                 propriedadeBean.setPeriodicidade(rs.getInt("periodicidade"));
-                propriedadeBean.setEmail(rs.getString("email"));
                 
                 estadoBean.setId(rs.getInt("id_estado"));
                 estadoBean.setNome(rs.getString("nm_estado"));
@@ -195,6 +194,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
                 propriedadeBean.setNumero(rs.getString("numero"));
                 propriedadeBean.setComplemento(rs.getString("complemento"));
                 propriedadeBean.setTelefone(rs.getString("telefone"));
+                propriedadeBean.setEmail(rs.getString("email"));
                 propriedadeBean.setProprietario(rs.getString("proprietario"));
                 propriedadeBean.setPeriodicidade(rs.getInt("periodicidade"));
                 
@@ -216,7 +216,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
         return propriedadeBeanList;
     }
     
-    public List<CidadeBean> listarRacas(CidadeBean objeto) throws SQLException {
+    public List<CidadeBean> listarCidades(CidadeBean objeto) throws SQLException {
         ConnectionFactory conexao = new ConnectionFactory();
         Connection conn = conexao.conectar();
         List<CidadeBean> cidadeBeanList = new ArrayList(); 
