@@ -16,7 +16,7 @@
     <div class="login-box">
         <div class="side-left">
             <div class="conteudo">
-                <h2>Ordenha WEB</h2>
+                <h2>Milkcode</h2>
                 <p>Promovendo confiança e produtividade em cada ordenha!</p>
             </div>
         </div>

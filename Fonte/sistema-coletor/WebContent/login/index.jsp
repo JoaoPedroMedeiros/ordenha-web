@@ -16,7 +16,7 @@
         <div class="login-box">
             <div class="side-left">
                 <div class="conteudo">
-                    <h2>Milk Colector</h2>
+                    <h2>Milkode</h2>
                     <p> Deixandos seu dia mais fresco desde 1920!</p>
                 </div>
             </div>
