@@ -15,6 +15,10 @@
     <h1 class="body">Fazenda
       ${sessionScope.usuario.propriedade.nome}</h1>
   </div>
+  <form action="/sistema-produtor/cadastrar-vaca.jsp" method="post">
+    <input type="hidden" id="acao" name="acao" value="ler"/>
+    <input class="btn" type="submit" value="Cadastrar"/>
+  </form>
   <div id="conteudo">
       <table width="100%">
         <thead>
@@ -28,9 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <c:forEach items="${requestScope.vacaBeanList}" var="vaca"> 
-            <form action="/sistema-produtor/servlets/vaca" method="get"> 
-              <input type="hidden" id="id" name="id" value="${vaca.id}"/>
+          <c:forEach items="${requestScope.vacaBeanList}" var="vaca">
               <tr>
                 <td align="left"><c:out value="${vaca.nome}" /></td>
                 <td align="left"><fmt:formatDate pattern = "dd/MM/yyyy" value="${vaca.dataNascimento}" /></td>
@@ -38,8 +40,16 @@
                 <td align="left"><c:out value="${vaca.raca.descricao}" /></td>
                 <td align="left"><c:out value="${vaca.observacao}" /></td>
                 <td align="left">
-                  <input class="btn" type="submit" value="Alterar" />
-                  <input class="btn" type="submit" value="Excluir" />
+                  <form action="/sistema-produtor/servlets/vaca" method="post"> 
+                    <input type="hidden" id="id" name="id" value="${vaca.id}"/>
+                    <input type="hidden" id="acao" name="acao" value="ler"/>
+                    <input class="btn" type="submit" value="Alterar" />
+                  </form>
+                  <form action="/sistema-produtor/servlets/vaca" method="post">
+                    <input type="hidden" id="id" name="id" value="${vaca.id}"/>
+                    <input type="hidden" id="acao" name="acao" value="deletar"/>
+                    <input class="btn" type="submit" value="Excluir" />
+                  </form>
                 </td>
               </tr>
             </form>
