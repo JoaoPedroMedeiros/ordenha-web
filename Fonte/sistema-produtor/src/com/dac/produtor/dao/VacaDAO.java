@@ -20,18 +20,25 @@ public class VacaDAO implements CrudDAO<VacaBean> {
     public void inserir(VacaBean objeto) throws SQLException {
         ConnectionFactory conexao = new ConnectionFactory();
         Connection conn = conexao.conectar();
-
+        
         try {
-            String sql = "INSERT INTO vacas (id_raca, nome, data_nascimento, peso, doente, prenha, observacao) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO vacas ("
+                    + "id_raca, "
+                    + "nome, "
+                    + "data_nascimento, "
+                    + "peso, "
+//                    + "doente, "
+//                    + "prenha, "
+                    + "observacao) "
+                    + "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, objeto.getRaca().getId());
             stm.setString(2, objeto.getNome());
-            stm.setDate(3, (Date) objeto.getDataNascimento());
+            stm.setDate(3, new java.sql.Date(objeto.getDataNascimento().getTime()));
             stm.setFloat(4, objeto.getPeso());
-            stm.setBoolean(5, objeto.isDoente());
-            stm.setBoolean(6, objeto.isPrenha());
-            stm.setString(7, objeto.getObservacao());
+//            stm.setBoolean(5, objeto.isDoente());
+//            stm.setBoolean(6, objeto.isPrenha());
+            stm.setString(5, objeto.getObservacao());
             stm.execute();
         } finally {
             conexao.Desconectar(conn);
