@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Login", urlPatterns = { "/servlets/login" })
 public class LoginServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 1L;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NoSuchAlgorithmException {
         HttpSession session = request.getSession();
@@ -45,7 +47,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 else {
                     session.setAttribute("usuario", usuario);
-                    response.sendRedirect("/sistema-produtor/linha-do-tempo.jsp");
+                    response.sendRedirect("/sistema-produtor/servlets/movimento-tanque");
                 }
             }
         } catch (SQLException ex) {
@@ -53,6 +55,17 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    public static UsuarioBean getUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        UsuarioBean usuario = (UsuarioBean) request.getSession().getAttribute("usuario");
+        
+        if (usuario == null) {
+            response.sendRedirect("/sistema-produtor/login/");
+            throw new NullPointerException("Usuário não existe na sessão");
+        }
+        
+        return usuario;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
     // + sign on the left to edit the code.">
     /**

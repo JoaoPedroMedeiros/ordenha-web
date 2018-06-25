@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,12 @@ import com.dac.produtor.util.PreparedStatementHelper;
 
 public class VacaDAO implements CrudDAO<VacaBean> {
 
+    private UsuarioBean usuario;
+    
+    public VacaDAO(UsuarioBean usuario) {
+        this.usuario = usuario;
+    }
+    
     @Override
     public void inserir(VacaBean objeto) throws SQLException {
         ConnectionFactory conexao = new ConnectionFactory();
@@ -27,10 +32,11 @@ public class VacaDAO implements CrudDAO<VacaBean> {
                     + "nome, "
                     + "data_nascimento, "
                     + "peso, "
+                    + "id_propriedade, "
 //                    + "doente, " 
 //                    + "prenha, "
                     + "observacao) "
-                    + "VALUES (?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, objeto.getRaca().getId());
             stm.setString(2, objeto.getNome());
@@ -38,7 +44,8 @@ public class VacaDAO implements CrudDAO<VacaBean> {
             stm.setFloat(4, objeto.getPeso());
 //            stm.setBoolean(5, objeto.isDoente());
 //            stm.setBoolean(6, objeto.isPrenha());
-            stm.setString(5, objeto.getObservacao());
+            stm.setInt(5, usuario.getPropriedade().getId());
+            stm.setString(6, objeto.getObservacao());
             stm.execute();
         } finally {
             conexao.Desconectar(conn);
@@ -137,17 +144,19 @@ public class VacaDAO implements CrudDAO<VacaBean> {
                     "SELECT v.*, r.id AS id_raca, r.nome AS nm_raca FROM vacas v "
                     + "INNER JOIN racas r ON r.id = v.id_raca "
                     + "WHERE 1=1 ");
-            if(objeto.getId() != null) {
-                statementHelper.setParameter("AND v.id = ?", objeto.getId());
-            }
-            if(objeto.getNome() != null) {
-                statementHelper.setParameter("AND upper(v.nome) = ?", objeto.getNome().toUpperCase());
-            }
-            if(objeto.getDataNascimento() != null) {
-                statementHelper.setParameter("AND v.data_nascimento = ?", objeto.getDataNascimento());
-            }
-            if(objeto.getRaca().getId() != null) {
-                statementHelper.setParameter("AND r.id = ?", objeto.getRaca().getId());
+            if (objeto != null) {
+                if(objeto.getId() != null) {
+                    statementHelper.setParameter("AND v.id = ?", objeto.getId());
+                }
+                if(objeto.getNome() != null) {
+                    statementHelper.setParameter("AND upper(v.nome) = ?", objeto.getNome().toUpperCase());
+                }
+                if(objeto.getDataNascimento() != null) {
+                    statementHelper.setParameter("AND v.data_nascimento = ?", objeto.getDataNascimento());
+                }
+                if(objeto.getRaca().getId() != null) {
+                    statementHelper.setParameter("AND r.id = ?", objeto.getRaca().getId());
+                }
             }
             
             PreparedStatement stm = statementHelper.prepareStatement(conn);   

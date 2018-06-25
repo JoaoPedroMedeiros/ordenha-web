@@ -40,7 +40,7 @@ public class ColetasService {
             return Response.status(Status.BAD_REQUEST).build();
         
         // Cria a DAO para consulta das coletas
-        ColetaDAO coletaDAO = new ColetaDAO(null);
+        ColetaDAO coletaDAO = new ColetaDAO();
         
         try {
             // Realiza a listagem resumida das coletas

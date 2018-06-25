@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 else {
                     session.setAttribute("usuario", usuario);
-                    response.sendRedirect("/sistema-coletor/home.jsp");
+                    response.sendRedirect("/sistema-coletor/servlets/home");
                 }
             }
         } catch (SQLException ex) {

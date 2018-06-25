@@ -10,11 +10,26 @@ import java.util.List;
 import com.dac.coletor.beans.CidadeBean;
 import com.dac.coletor.beans.EstadoBean;
 import com.dac.coletor.beans.PropriedadeBean;
-import com.dac.coletor.dao.ConnectionFactory;
 import com.dac.coletor.util.PreparedStatementHelper;
 
 public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
 
+    public int totalPropriedades() throws SQLException {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.conectar();
+        
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT count(*) total FROM propriedades"
+            );
+            ResultSet rs = statement.executeQuery();
+            return rs.first() ? rs.getInt("total") : 0;
+        }
+        finally {
+            connectionFactory.Desconectar(connection);
+        }
+    }
+    
     @Override
     public void inserir(PropriedadeBean objeto) throws SQLException {
         ConnectionFactory conexao = new ConnectionFactory();
@@ -100,7 +115,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
         Connection conn = conexao.conectar();
 
         try {
-            String sql = "SELECT p.*, c.id AS id_cidade, c.nome AS nm_cidade, e.id AS id_estado, e.nome AS nm_estado, e.sigla FROM propriedades p "
+            String sql = "SELECT p.*, c.id AS id_cidade, c.nome AS nm_cidade, e.id AS id_estado, e.nome AS nm_estado, e.uf FROM propriedades p "
                     + "INNER JOIN cidades c ON c.id = p.id_cidade "
                     + "INNER JOIN estados e ON e.id = c.id_estado "
                     + "WHERE p.id = ?";
@@ -126,7 +141,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
                 
                 estadoBean.setId(rs.getInt("id_estado"));
                 estadoBean.setNome(rs.getString("nm_estado"));
-                estadoBean.setSigla(rs.getString("sigla"));
+                estadoBean.setSigla(rs.getString("uf"));
                 
                 cidadeBean.setId(rs.getInt("id_cidade"));
                 cidadeBean.setNome(rs.getString("nm_cidade"));
@@ -150,33 +165,35 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
 
         try {
             PreparedStatementHelper statementHelper = new PreparedStatementHelper(
-                    "SELECT p.*, c.id AS id_cidade, c.nome AS nm_cidade, e.id AS id_estado, e.nome AS nm_estado, e.sigla FROM propriedades p "
+                    "SELECT p.*, c.id AS id_cidade, c.nome AS nm_cidade, e.id AS id_estado, e.nome AS nm_estado, e.uf FROM propriedades p "
                             + "INNER JOIN cidades c ON c.id = p.id_cidade "
                             + "INNER JOIN estados e ON e.id = c.id_estado "
                             + "WHERE 1=1 ");
-            if(objeto.getId() != null) {
-                statementHelper.setParameter("AND p.id = ?", objeto.getId());
-            }
-            if(objeto.getNome() != null) {
-                statementHelper.setParameter("AND upper(p.nome) = ?", objeto.getNome().toUpperCase());
-            }
-            if(objeto.getCnpj() != null) {
-                statementHelper.setParameter("AND upper(p.cnpj) = ?", objeto.getCnpj().toUpperCase());
-            }
-            if(objeto.getEmail() != null) {
-                statementHelper.setParameter("AND upper(p.email) = ?", objeto.getEmail().toUpperCase());
-            }
-            if(objeto.getTelefone() != null) {
-                statementHelper.setParameter("AND upper(p.telefone) = ?", objeto.getTelefone().toUpperCase());
-            }
-            if(objeto.getProprietario() != null) {
-                statementHelper.setParameter("AND upper(p.proprietario) = ?", objeto.getProprietario().toUpperCase());
-            }
-            if(objeto.getCidade().getId() != null) {
-                statementHelper.setParameter("AND c.id = ?", objeto.getCidade().getId());
-            }
-            if(objeto.getCidade().getEstado().getId() != null) {
-                statementHelper.setParameter("AND e.id = ?", objeto.getCidade().getEstado().getId());
+            if (objeto != null) {
+                if(objeto.getId() != null) {
+                    statementHelper.setParameter("AND p.id = ?", objeto.getId());
+                }
+                if(objeto.getNome() != null) {
+                    statementHelper.setParameter("AND upper(p.nome) = ?", objeto.getNome().toUpperCase());
+                }
+                if(objeto.getCnpj() != null) {
+                    statementHelper.setParameter("AND upper(p.cnpj) = ?", objeto.getCnpj().toUpperCase());
+                }
+                if(objeto.getEmail() != null) {
+                    statementHelper.setParameter("AND upper(p.email) = ?", objeto.getEmail().toUpperCase());
+                }
+                if(objeto.getTelefone() != null) {
+                    statementHelper.setParameter("AND upper(p.telefone) = ?", objeto.getTelefone().toUpperCase());
+                }
+                if(objeto.getProprietario() != null) {
+                    statementHelper.setParameter("AND upper(p.proprietario) = ?", objeto.getProprietario().toUpperCase());
+                }
+                if(objeto.getCidade().getId() != null) {
+                    statementHelper.setParameter("AND c.id = ?", objeto.getCidade().getId());
+                }
+                if(objeto.getCidade().getEstado().getId() != null) {
+                    statementHelper.setParameter("AND e.id = ?", objeto.getCidade().getEstado().getId());
+                }
             }
             
             PreparedStatement stm = statementHelper.prepareStatement(conn);  
@@ -200,7 +217,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
                 
                 estadoBean.setId(rs.getInt("id_estado"));
                 estadoBean.setNome(rs.getString("nm_estado"));
-                estadoBean.setSigla(rs.getString("sigla"));
+                estadoBean.setSigla(rs.getString("uf"));
                 
                 cidadeBean.setId(rs.getInt("id_cidade"));
                 cidadeBean.setNome(rs.getString("nm_cidade"));
@@ -222,7 +239,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
         List<CidadeBean> cidadeBeanList = new ArrayList(); 
 
         try {
-            String sql = "SELECT c.*, e.id AS id_estado, e.nome AS nm_estado, e.sigla AS sigla "
+            String sql = "SELECT c.*, e.id AS id_estado, e.nome AS nm_estado, e.uf AS sigla "
                     + "FROM cidades c "
                     + "INNER JOIN estados e ON e.id = c.id_estado "
                     + "WHERE 1=1 ";
@@ -236,7 +253,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
                 
                 estadoBean.setId(rs.getInt("id_estado"));
                 estadoBean.setNome(rs.getString("nm_estado"));
-                estadoBean.setSigla(rs.getString("sigla"));
+                estadoBean.setSigla(rs.getString("uf"));
                 
                 cidadeBean.setEstado(estadoBean);
                 cidadeBeanList.add(cidadeBean);

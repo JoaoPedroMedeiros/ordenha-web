@@ -77,7 +77,9 @@
                             </span>
                         </div>
                         <div class="col-md-2">
-                            <button id="singlebutton" name="singlebutton" class="btn btn-warning">Editar</button>
+                            <c:if test="${movimento.getClass().getSimpleName().equals(\"MovimentoOrdenhaBean\")}">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-warning">Editar</button>
+                            </c:if>
                         </div>
                     </div>
                 </c:forEach>

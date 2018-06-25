@@ -2,12 +2,10 @@ package com.dac.coletor.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +20,7 @@ import com.dac.coletor.dao.PropriedadeDAO;
 /**
  * Servlet implementation class ColetaServlet
  */
-@WebServlet("/ColetaServlet")
+@WebServlet(name = "Coleta", urlPatterns = {"/servlets/coleta"})
 public class ColetaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,35 +38,16 @@ public class ColetaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		//Listar Coletas
-		ColetaDAO coletaDAO = new ColetaDAO(null);
-		ColetaBean coletaBean = new ColetaBean();
-		PropriedadeBean propriedadeBean = new PropriedadeBean();
-		List<ColetaBean> coletaBeanList = new ArrayList();
-		
+
 		try {
-            if (request.getParameter("id") != null) {
-                coletaBean.setId(Integer.parseInt(request.getParameter("id")));
-                coletaBean = coletaDAO.buscarPorId(coletaBean);
-                
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("?");
-                rd.forward(request, response);
-                return;
-            } else {
-            	if (request.getParameter("quantidade") != null) {
-	                coletaBean.setQuantidade(Float.valueOf(request.getParameter("quantidade")));
-	            }
-		        if (request.getParameter("dataHora") != null) {
-		                coletaBean.setDataHora(request.getParameter("dataHora"));
-		        }
-		        coletaBean.setPropriedade(propriedadeBean);
-		        coletaBeanList = coletaDAO.listar(coletaBean);
-		        
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/sistema-coletor/registro-coleta.jsp");
-                rd.forward(request, response);
-                return;
-              }
-        }catch(SQLException ex){
+		    List<ColetaBean> coletas = new ColetaDAO().listar(null);
+		    List<PropriedadeBean> propriedades = new PropriedadeDAO().listar(null);
+		    
+	        request.setAttribute("coletas", coletas);
+	        request.setAttribute("propriedades", propriedades);
+            getServletContext().getRequestDispatcher("/registro-coleta.jsp").forward(request, response);
+        }
+		catch(SQLException ex){
 		      ex.printStackTrace();
 	     }
 	}
@@ -81,52 +60,83 @@ public class ColetaServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
+
     	if (action.equals("inserir")) {
     		
-    		//Inserir Coleta
-	     	ColetaDAO coletaDAO = new ColetaDAO(null);
+    	    // Validação dos campos
+    	    if (request.getParameter("idPropriedade") == null || request.getParameter("idPropriedade").isEmpty()) {
+    	        request.setAttribute("msgValidacao", "Selecione uma propriedade");
+    	        doGet(request, response);
+    	        return;
+    	    }
+    	    
+    	    if (request.getParameter("quantidade") == null || request.getParameter("quantidade").isEmpty()) {
+                request.setAttribute("msgValidacao", "Preencha a quantidade");
+                doGet(request, response);
+                return;
+            }
+    	    
+    	    if (request.getParameter("dataHora") == null || request.getParameter("dataHora").isEmpty()) {
+                request.setAttribute("msgValidacao", "Preencha a data e a hora");
+                doGet(request, response);
+                return;
+            }
+    	    
 	     	ColetaBean coletaBean = new ColetaBean();
-	     	PropriedadeBean propriedadeBean = new PropriedadeBean();
-	     
-	     	try {
-	     		if (request.getParameter("id") != null) {
-	                propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
-	     		}
-	     		
-	            if (request.getParameter("quantidade") != null) {
-	                coletaBean.setQuantidade(Float.valueOf(request.getParameter("quantidade")));
-	            } 
-		        if (request.getParameter("dataHora") != null) {
-		            coletaBean.setDataHora(new SimpleDateFormat(request.getParameter("dataHora")));
-		        } 
-	     	 }catch (SQLException ex) {
-	                ex.printStackTrace();
-	              }
-	            
-	     	RequestDispatcher rd = getServletContext().getRequestDispatcher("/sistema-coletor/registro-coleta.jsp");
-            rd.forward(request, response);
+
+ 		    PropriedadeBean propriedade = new PropriedadeBean();
+            propriedade.setId(Integer.parseInt(request.getParameter("idPropriedade")));
+            coletaBean.setPropriedade(propriedade);
+     		
+            coletaBean.setQuantidade(Float.valueOf(request.getParameter("quantidade")));
+             
+            try {
+                coletaBean.setDataHora(new SimpleDateFormat("yyyy-MM-ddhh:mm").parse(request.getParameter("dataHora").replace("T", "")));
+            }
+            catch (ParseException e) {
+                e.printStackTrace();
+                response.sendError(500, "Erro ao convertar a data");
+                return;
+            }
+	         
+            ColetaDAO coletaDao = new ColetaDAO();
+            try {
+                coletaDao.inserir(coletaBean);
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                response.sendError(500, "Erro ao registrar a coleta. " + e.getMessage());
+                return;
+            }
+            
+	     	doGet(request, response);
             
          }	else if (action.equals("excluir")) {
     	
-        	 ColetaDAO coletaDAO = new ColetaDAO(null);
+        	 ColetaDAO coletaDAO = new ColetaDAO();
         	 ColetaBean coletaBean = new ColetaBean();
+        	 
+             
+        	 if (request.getParameter("id") == null) {
+                 doGet(request, response);
+                 return;
+             }
+        	 
+        	 coletaBean.setId(Integer.valueOf(request.getParameter("id")));
              
              try {
-                 if (request.getParameter("id") != null) {
-                     coletaBean.setId(Integer.parseInt(request.getParameter("id")));
-                 }
-
                  coletaDAO.deletar(coletaBean);
+
              } catch (SQLException ex) {
                  ex.printStackTrace();
+                 response.sendError(500, "Erro ao excluir a coleta. " + ex.getMessage());
+                 return;
              }
              
-             RequestDispatcher rd = getServletContext().getRequestDispatcher("/sistema-coletor/registro-coleta.jsp");
-             rd.forward(request, response);
-}
-         else {
-        	 RequestDispatcher rd = getServletContext().getRequestDispatcher("/sistema-coletor/erro.jsp");
-             rd.forward(request, response);
+             doGet(request, response);
          }
-}
+         else {
+             doGet(request, response);
+         }
+	}
 }

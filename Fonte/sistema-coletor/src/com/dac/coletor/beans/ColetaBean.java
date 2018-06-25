@@ -8,7 +8,7 @@ public class ColetaBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    private float quantidade;
+    private Float quantidade;
     private Date dataHora;
     private PropriedadeBean propriedade;
 
@@ -23,7 +23,7 @@ public class ColetaBean implements Serializable {
         this.id = id;
     }
 
-    public float getQuantidade() {
+    public Float getQuantidade() {
         return quantidade;
     }
 

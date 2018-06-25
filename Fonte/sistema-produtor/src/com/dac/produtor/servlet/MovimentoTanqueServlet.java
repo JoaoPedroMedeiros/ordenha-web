@@ -20,6 +20,7 @@ import com.dac.produtor.beans.MovimentoColetaBean;
 import com.dac.produtor.beans.MovimentoOrdenhaBean;
 import com.dac.produtor.beans.MovimentoTanqueBean;
 import com.dac.produtor.beans.OrdenhaBean;
+import com.dac.produtor.beans.UsuarioBean;
 import com.dac.produtor.dao.OrdenhaDAO;
 
 @WebServlet(name = "MovimentoTanque", urlPatterns = {"/servlets/movimento-tanque"})
@@ -41,7 +42,7 @@ public class MovimentoTanqueServlet extends HttpServlet {
             
         List<OrdenhaBean> ordenhas;
         try {
-            ordenhas = new OrdenhaDAO(4).listarPorMes(Integer.valueOf(ano), Integer.valueOf(mes));
+            ordenhas = new OrdenhaDAO(LoginServlet.getUsuario(req, resp)).listarPorMes(Integer.valueOf(ano), Integer.valueOf(mes));
         }
         catch (NumberFormatException e) {
             resp.setStatus(400);
@@ -66,9 +67,11 @@ public class MovimentoTanqueServlet extends HttpServlet {
         try {
             Client client = ClientBuilder.newClient();
     
+            UsuarioBean usuario = LoginServlet.getUsuario(req, resp);
+            
             ColetasRespose coletasResponse = 
                 client
-                    .target(String.format("http://localhost:8080/sistema-coletor/rest/coletas?cnpj=%s&ano=%s&mes=%s", "70987637000107", ano, mes))
+                    .target(String.format("http://localhost:8080/sistema-coletor/rest/coletas?cnpj=%s&ano=%s&mes=%s", usuario.getPropriedade().getCnpj(), ano, mes))
                     .request(MediaType.APPLICATION_JSON)
                     .get(ColetasRespose.class);
             

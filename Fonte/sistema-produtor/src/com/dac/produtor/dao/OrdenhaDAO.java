@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,15 +18,76 @@ import com.dac.produtor.beans.VacaOrdenhadaBean;
 
 public class OrdenhaDAO implements CrudDAO<OrdenhaBean> {
 
-    private Integer idPropriedade;
+    private UsuarioBean usuario;
     
-    public OrdenhaDAO(Integer idPropriedade) {
-        this.idPropriedade = idPropriedade;
+    public OrdenhaDAO(UsuarioBean usuario) {
+        this.usuario = usuario;
     }
     
     @Override
-    public void inserir(OrdenhaBean objeto) throws SQLException {
+    public void inserir(OrdenhaBean ordenha) throws SQLException {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.conectar();
+        connection.setAutoCommit(false);
         
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO Ordenhas (\r\n" + 
+                    "  data_hora     ,\r\n" + 
+                    "  id_usuario    ,\r\n" + 
+                    "  id_propriedade\r\n" + 
+                    ")\r\n" + 
+                    "VALUES (\r\n" + 
+                    "  ?,\r\n" + 
+                    "  ?,\r\n" + 
+                    "  ?\r\n" + 
+                    ")", 
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            
+            statement.setTimestamp(1, new Timestamp(ordenha.getDataHora().getTime()));
+            statement.setInt(2, usuario.getId());
+            statement.setInt(3, usuario.getPropriedade().getId());
+            statement.executeUpdate();
+            
+            ResultSet rsId = statement.getGeneratedKeys();
+
+            if (rsId.first()) {
+                ordenha.setId(rsId.getString(1) != null ? rsId.getInt(1) : null);
+            }
+            
+            if (ordenha.getId() == null) {
+                throw new SQLException("Não foi identificado o ID gerado na inserção");
+            }
+            
+            for (VacaOrdenhadaBean vaca : ordenha.getVacas()) {
+                PreparedStatement stsVaca = connection.prepareStatement(
+                        "INSERT INTO VacasOrdenhadas(\r\n" + 
+                        "  id_vaca         ,\r\n" + 
+                        "  id_ordenha      ,\r\n" + 
+                        "  quantidade_leite\r\n" + 
+                        ")\r\n" + 
+                        "VALUES (\r\n" + 
+                        "  ?,\r\n" + 
+                        "  ?,\r\n" + 
+                        "  ?\r\n" + 
+                        ")"
+                );
+                stsVaca.setInt(1, vaca.getVaca().getId());
+                stsVaca.setInt(2, ordenha.getId());
+                stsVaca.setFloat(3, vaca.getQuantidadeLeite());
+                stsVaca.executeUpdate();
+            }
+            
+            connection.commit();
+        }
+        catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }
+        finally {
+            connectionFactory.Desconectar(connection);
+        }
     }
 
     @Override
@@ -67,7 +130,7 @@ public class OrdenhaDAO implements CrudDAO<OrdenhaBean> {
                 "AND month(data_hora) = ?"
             );
 
-            statement.setInt(1, this.idPropriedade);
+            statement.setInt(1, this.usuario.getPropriedade().getId());
             statement.setInt(2, ano);
             statement.setInt(3, mes);
             

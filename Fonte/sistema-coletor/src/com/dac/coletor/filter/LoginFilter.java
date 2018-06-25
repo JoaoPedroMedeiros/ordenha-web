@@ -29,7 +29,7 @@ public class LoginFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
         
         if (session.getAttribute("usuario") != null) {
-            ((HttpServletResponse) response).sendRedirect("/sistema-coletor/home.jsp");
+            ((HttpServletResponse) response).sendRedirect("/sistema-coletor/servlets/home");
         }
         else {
             filter.doFilter(request, response);

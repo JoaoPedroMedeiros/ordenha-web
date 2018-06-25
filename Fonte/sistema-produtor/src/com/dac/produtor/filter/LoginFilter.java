@@ -29,7 +29,7 @@ public class LoginFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
         
         if (session.getAttribute("usuario") != null) {
-            ((HttpServletResponse) response).sendRedirect("/sistema-produtor/linha-do-tempo.jsp");
+            ((HttpServletResponse) response).sendRedirect("/sistema-produtor/servlets/movimento-tanque");
         }
         else {
             filter.doFilter(request, response);

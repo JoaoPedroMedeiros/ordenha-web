@@ -45,7 +45,7 @@ public class VacaServlet extends HttpServlet {
         if (request.getParameter("acao") != null) {
             String acao = request.getParameter("acao");
             
-            VacaDAO vacaDAO = new VacaDAO();
+            VacaDAO vacaDAO = new VacaDAO(LoginServlet.getUsuario(request, response));
             VacaBean vacaBean = new VacaBean();
             RacaBean racaBean = new RacaBean();
             List<VacaBean> vacaBeanList = new ArrayList();
@@ -82,6 +82,7 @@ public class VacaServlet extends HttpServlet {
                         racaBeanList = vacaDAO.listarRacas(racaBean);
     
                         RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciar-vacas.jsp");
+                        request.setAttribute("id_raca", request.getAttribute("id_raca"));
                         request.setAttribute("vacaBeanList", vacaBeanList);
                         request.setAttribute("racaBeanList", racaBeanList);
                         request.setAttribute("vacaBean", vacaBean);
@@ -104,7 +105,7 @@ public class VacaServlet extends HttpServlet {
         if (request.getParameter("acao") != null) {
             String acao = request.getParameter("acao");
             
-            VacaDAO vacaDAO = new VacaDAO();
+            VacaDAO vacaDAO = new VacaDAO(LoginServlet.getUsuario(request, response));
             VacaBean vacaBean = new VacaBean();
             RacaBean racaBean = new RacaBean();
             List<VacaBean> vacaBeanList = new ArrayList();
@@ -244,10 +245,4 @@ public class VacaServlet extends HttpServlet {
             }
         }
     }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
-
 }
