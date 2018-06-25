@@ -236,44 +236,6 @@ public class VacaServlet extends HttpServlet {
                         ex.printStackTrace();
                     }
                     break;
-                case "listar":
-                    try {
-                        if (request.getParameter("nome") != null) {
-                            vacaBean.setNome(request.getParameter("nome"));
-                        }
-                        if (request.getParameter("data_nascimento") != null) {
-                            vacaBean.setDataNascimento(
-                                    new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_nascimento")));
-                        }
-                        if (request.getParameter("peso") != null) {
-                            vacaBean.setPeso(Float.parseFloat(request.getParameter("peso")));
-                        }
-                        if (request.getParameter("doente") != null) {
-                            vacaBean.setDoente(Boolean.parseBoolean(request.getParameter("doente")));
-                        }
-                        if (request.getParameter("prenha") != null) {
-                            vacaBean.setPrenha(Boolean.parseBoolean(request.getParameter("prenha")));
-                        }
-                        if (request.getParameter("observaca") != null) {
-                            vacaBean.setObservacao(request.getParameter("observacao"));
-                        }
-                        if (request.getParameter("id_raca") != null) {
-                            racaBean.setId(Integer.parseInt(request.getParameter("id_raca")));
-                        }
-                        vacaBean.setRaca(racaBean);
-    
-                        vacaBeanList = vacaDAO.listar(vacaBean);
-    
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciar-vacas.jsp");
-                        request.setAttribute("vacaBeanList", vacaBeanList);
-                        rd.forward(request, response);
-                        return;
-                    } catch (ParseException ex) {
-                        ex.printStackTrace();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                    break;
                 default:
                     break;
             }

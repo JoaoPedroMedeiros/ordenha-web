@@ -12,6 +12,7 @@ import com.dac.coletor.beans.EstadoBean;
 import com.dac.coletor.beans.PropriedadeBean;
 import com.dac.coletor.dao.ConnectionFactory;
 import com.dac.coletor.util.PreparedStatementHelper;
+import com.dac.produtor.beans.RacaBean;
 
 public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
 
@@ -21,21 +22,20 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
         Connection conn = conexao.conectar();
 
         try {
-            String sql = "INSERT INTO propriedades (id, id_cidade, cnpj, nome, endereco, bairro, numero, complemento, telefone, proprietario, email, periodicidade) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO propriedades (id_cidade, cnpj, nome, endereco, bairro, numero, complemento, telefone, proprietario, email, periodicidade) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(1, objeto.getId());
-            stm.setInt(2, objeto.getCidade().getId());
-            stm.setString(3, objeto.getCnpj());
-            stm.setString(4, objeto.getNome());
-            stm.setString(5, objeto.getEndereco());
-            stm.setString(6, objeto.getBairro());
-            stm.setString(7, objeto.getNumero());
-            stm.setString(8, objeto.getComplemento());
-            stm.setString(9, objeto.getTelefone());
-            stm.setString(10, objeto.getProprietario());
-            stm.setString(11, objeto.getEmail());
-            stm.setInt(12, objeto.getPeriodicidade());
+            stm.setInt(1, objeto.getCidade().getId());
+            stm.setString(2, objeto.getCnpj());
+            stm.setString(3, objeto.getNome());
+            stm.setString(4, objeto.getEndereco());
+            stm.setString(5, objeto.getBairro());
+            stm.setString(6, objeto.getNumero());
+            stm.setString(7, objeto.getComplemento());
+            stm.setString(8, objeto.getTelefone());
+            stm.setString(9, objeto.getProprietario());
+            stm.setString(10, objeto.getEmail());
+            stm.setInt(11, objeto.getPeriodicidade());
             stm.execute();
         } finally {
             conexao.Desconectar(conn);
@@ -123,6 +123,7 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
                 propriedadeBean.setTelefone(rs.getString("telefone"));
                 propriedadeBean.setProprietario(rs.getString("proprietario"));
                 propriedadeBean.setPeriodicidade(rs.getInt("periodicidade"));
+                propriedadeBean.setEmail(rs.getString("email"));
                 
                 estadoBean.setId(rs.getInt("id_estado"));
                 estadoBean.setNome(rs.getString("nm_estado"));
@@ -172,6 +173,12 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
             if(objeto.getProprietario() != null) {
                 statementHelper.setParameter("AND upper(p.proprietario) = ?", objeto.getProprietario().toUpperCase());
             }
+            if(objeto.getCidade().getId() != null) {
+                statementHelper.setParameter("AND c.id = ?", objeto.getCidade().getId());
+            }
+            if(objeto.getCidade().getEstado().getId() != null) {
+                statementHelper.setParameter("AND e.id = ?", objeto.getCidade().getEstado().getId());
+            }
             
             PreparedStatement stm = statementHelper.prepareStatement(conn);  
             ResultSet rs = stm.executeQuery();
@@ -207,6 +214,37 @@ public class PropriedadeDAO implements CrudDAO<PropriedadeBean>{
             conexao.Desconectar(conn);
         }
         return propriedadeBeanList;
+    }
+    
+    public List<CidadeBean> listarRacas(CidadeBean objeto) throws SQLException {
+        ConnectionFactory conexao = new ConnectionFactory();
+        Connection conn = conexao.conectar();
+        List<CidadeBean> cidadeBeanList = new ArrayList(); 
+
+        try {
+            String sql = "SELECT c.*, e.id AS id_estado, e.nome AS nm_estado, e.sigla AS sigla "
+                    + "FROM cidades c "
+                    + "INNER JOIN estados e ON e.id = c.id_estado "
+                    + "WHERE 1=1 ";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                CidadeBean cidadeBean = new CidadeBean();
+                EstadoBean estadoBean = new EstadoBean();
+                cidadeBean.setId(rs.getInt("id"));
+                cidadeBean.setNome(rs.getString("nome"));
+                
+                estadoBean.setId(rs.getInt("id_estado"));
+                estadoBean.setNome(rs.getString("nm_estado"));
+                estadoBean.setSigla(rs.getString("sigla"));
+                
+                cidadeBean.setEstado(estadoBean);
+                cidadeBeanList.add(cidadeBean);
+            }
+        } finally {
+            conexao.Desconectar(conn);
+        }
+        return cidadeBeanList;
     }
 
 }

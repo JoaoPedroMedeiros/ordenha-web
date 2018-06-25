@@ -13,6 +13,10 @@
     <div>
       <h1 class="body">Gerenciar Propriedades</h1>
     </div>
+    <form action="/sistema-coletor/servlets/propriedade" method="post"> 
+      <input type="hidden" id="acao" name="acao" value="ler"/>
+      <input class="btn" type="submit" value="Cadastrar"/>
+    </form>
     <div id="conteudo">
     <table width="100%">
       <thead>
@@ -21,6 +25,7 @@
           <th align="left">Cnpj</th>
           <th align="left">Proprietário</th>
           <th align="left">Endereco</th>
+          <th align="left">Cidade</th>
           <th align="left">Telefone</th>
           <th align="left">Email</th>
           <th align="left">Periodicidade</th>
@@ -28,23 +33,29 @@
         </tr>
       </thead>
       <tbody>
-        <c:forEach items="${requestScope.propriedadeBeanList}" var="propriedade"> 
-          <form action="/sistema-produtor/servlets/propriedade" method="get"> 
-            <input type="hidden" id="id" name="id" value="${propriedade.id}"/>
-            <tr>
-              <td align="left"><c:out value="${propriedade.nome}" /></td>
-              <td align="left"><c:out value="${propriedade.cnpj}" /></td>
-              <td align="left"><c:out value="${propriedade.proprietario}" /></td>
-              <td align="left"><c:out value="${propriedade.endereco}, ${propriedade.numero} - ${propriedade.complemento}" /></td>
-              <td align="left"><c:out value="${propriedade.telefone}" /></td>
-              <td align="left"><c:out value="${propriedade.email}" /></td>
-              <td align="left"><c:out value="${propriedade.periodicidade}" /></td>
-              <td align="left">
+        <c:forEach items="${requestScope.propriedadeBeanList}" var="propriedade">
+          <tr>
+            <td align="left"><c:out value="${propriedade.nome}" /></td>
+            <td align="left"><c:out value="${propriedade.cnpj}" /></td>
+            <td align="left"><c:out value="${propriedade.proprietario}" /></td>
+            <td align="left"><c:out value="${propriedade.endereco}, ${propriedade.numero} - ${propriedade.complemento}" /></td>
+            <td align="left"><c:out value="${propriedade.cidade.nome}" /></td>
+            <td align="left"><c:out value="${propriedade.telefone}" /></td>
+            <td align="left"><c:out value="${propriedade.email}" /></td>
+            <td align="left"><c:out value="${propriedade.periodicidade}" /></td>
+            <td align="left">
+              <form action="/sistema-coletor/servlets/propriedade" method="post">
+                <input type="hidden" id="id" name="id" value="${propriedade.id}"/>
+                <input type="hidden" id="acao" name="acao" value="ler"/> 
                 <input class="btn" type="submit" value="Alterar" />
+              </form>
+              <form action="/sistema-coletor/servlets/propriedade" method="post">
+                <input type="hidden" id="id" name="id" value="${propriedade.id}"/>
+                <input type="hidden" id="acao" name="acao" value="deletar"/> 
                 <input class="btn" type="submit" value="Excluir" />
-              </td>
-            </tr>
-          </form>
+              </form>
+            </td>
+          </tr>
         </c:forEach>
       </tbody>
     </table>
