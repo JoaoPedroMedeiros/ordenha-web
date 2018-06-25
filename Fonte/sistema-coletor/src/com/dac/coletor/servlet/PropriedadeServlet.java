@@ -52,31 +52,34 @@ public class PropriedadeServlet extends HttpServlet {
             switch (acao) {
                 case "listar":
                     try {
-                        if (request.getParameter("nome") != null) {
+                        if (request.getParameter("nome") != null && !request.getParameter("nome").isEmpty()) {
                             propriedadeBean.setNome(request.getParameter("nome"));
                         }
-                        if (request.getParameter("cnpj") != null) {
+                        if (request.getParameter("cnpj") != null && !request.getParameter("cnpj").isEmpty()) {
                             propriedadeBean.setCnpj(request.getParameter("cnpj"));
                         }
-                        if (request.getParameter("telefone") != null) {
+                        if (request.getParameter("telefone") != null && !request.getParameter("telefone").isEmpty()) {
                             propriedadeBean.setCnpj(request.getParameter("telefone"));
                         }
-                        if (request.getParameter("proprietario") != null) {
+                        if (request.getParameter("proprietario") != null && !request.getParameter("proprietario").isEmpty()) {
                             propriedadeBean.setCnpj(request.getParameter("proprietario"));
                         }
-                        if (request.getParameter("id_estado") != null) {
+                        if (request.getParameter("id_estado") != null && !request.getParameter("id_estado").isEmpty()) {
                             estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
                         }
-                        if (request.getParameter("id_cidade") != null) {
+                        if (request.getParameter("id_cidade") != null && !request.getParameter("id_cidade").isEmpty()) {
                             cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
                         }
                         cidadeBean.setEstado(estadoBean);
                         propriedadeBean.setCidade(cidadeBean);
     
                         propriedadeBeanList = propriedadeDAO.listar(propriedadeBean);
+                        cidadeBeanList = propriedadeDAO.listarCidades(cidadeBean);
     
                         RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciar-propriedades.jsp");
                         request.setAttribute("propriedadeBeanList", propriedadeBeanList);
+                        request.setAttribute("cidadeBeanList", cidadeBeanList);
+                        request.setAttribute("propriedadeBean", propriedadeBean);
                         rd.forward(request, response);
                         return;
                     } catch (SQLException ex) {
@@ -108,49 +111,49 @@ public class PropriedadeServlet extends HttpServlet {
             switch (acao) {
                 case "inserir":
                     try {
-                        if (request.getParameter("cnpj") != null) {
+                        if (request.getParameter("cnpj") != null && !request.getParameter("cnpj").isEmpty()) {
                             propriedadeBean.setCnpj(request.getParameter("cnpj"));
                         }
-                        if (request.getParameter("nome") != null) {
+                        if (request.getParameter("nome") != null && !request.getParameter("nome").isEmpty()) {
                             propriedadeBean.setNome(request.getParameter("nome"));
                         }
-                        if (request.getParameter("endereco") != null) {
+                        if (request.getParameter("endereco") != null && !request.getParameter("endereco").isEmpty()) {
                             propriedadeBean.setEndereco(request.getParameter("endereco"));
                         }
-                        if (request.getParameter("bairro") != null) {
+                        if (request.getParameter("bairro") != null && !request.getParameter("bairro").isEmpty()) {
                             propriedadeBean.setBairro(request.getParameter("bairro"));
                         }
-                        if (request.getParameter("numero") != null) {
+                        if (request.getParameter("numero") != null && !request.getParameter("numero").isEmpty()) {
                             propriedadeBean.setNumero(request.getParameter("numero"));
                         }
-                        if (request.getParameter("complemento") != null) {
+                        if (request.getParameter("complemento") != null && !request.getParameter("complemento").isEmpty()) {
                             propriedadeBean.setComplemento(request.getParameter("complemento"));
                         }
-                        if (request.getParameter("telefone") != null) {
+                        if (request.getParameter("telefone") != null && !request.getParameter("telefone").isEmpty()) {
                             propriedadeBean.setTelefone(request.getParameter("telefone"));
                         }
-                        if (request.getParameter("email") != null) {
+                        if (request.getParameter("email") != null && !request.getParameter("email").isEmpty()) {
                             propriedadeBean.setEmail(request.getParameter("email"));
                         }
-                        if (request.getParameter("proprietario") != null) {
+                        if (request.getParameter("proprietario") != null && !request.getParameter("proprietario").isEmpty()) {
                             propriedadeBean.setProprietario(request.getParameter("proprietario"));
                         }
-                        if (request.getParameter("periodicidade") != null) {
+                        if (request.getParameter("periodicidade") != null && !request.getParameter("periodicidade").isEmpty()) {
                             propriedadeBean.setPeriodicidade(Integer.parseInt(request.getParameter("periodicidade")));
                         }
-                        if (request.getParameter("id_estado") != null) {
+                        if (request.getParameter("id_estado") != null && !request.getParameter("id_estado").isEmpty()) {
                             estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
                         }
-                        if (request.getParameter("nome_estado") != null) {
+                        if (request.getParameter("nome_estado") != null && !request.getParameter("nome_estado").isEmpty()) {
                             estadoBean.setNome(request.getParameter("nome_estado"));
                         }
-                        if (request.getParameter("sigla") != null) {
+                        if (request.getParameter("sigla") != null && !request.getParameter("sigla").isEmpty()) {
                             estadoBean.setSigla(request.getParameter("sigla"));
                         }
-                        if (request.getParameter("id_cidade") != null) {
+                        if (request.getParameter("id_cidade") != null && !request.getParameter("id_cidade").isEmpty()) {
                             cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
                         }
-                        if (request.getParameter("nome_cidade") != null) {
+                        if (request.getParameter("nome_cidade") != null && !request.getParameter("nome_cidade").isEmpty()) {
                             cidadeBean.setNome(request.getParameter("nome_cidade"));
                         }
                         cidadeBean.setEstado(estadoBean);
@@ -176,52 +179,52 @@ public class PropriedadeServlet extends HttpServlet {
                     break;
                 case "alterar":
                     try {
-                        if (request.getParameter("id") != null) {
+                        if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
                             propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
                         }
-                        if (request.getParameter("cnpj") != null) {
+                        if (request.getParameter("cnpj") != null && !request.getParameter("cnpj").isEmpty()) {
                             propriedadeBean.setCnpj(request.getParameter("cnpj"));
                         }
-                        if (request.getParameter("nome") != null) {
+                        if (request.getParameter("nome") != null && !request.getParameter("nome").isEmpty()) {
                             propriedadeBean.setNome(request.getParameter("nome"));
                         }
-                        if (request.getParameter("endereco") != null) {
+                        if (request.getParameter("endereco") != null && !request.getParameter("endereco").isEmpty()) {
                             propriedadeBean.setEndereco(request.getParameter("endereco"));
                         }
-                        if (request.getParameter("bairro") != null) {
+                        if (request.getParameter("bairro") != null && !request.getParameter("bairro").isEmpty()) {
                             propriedadeBean.setBairro(request.getParameter("bairro"));
                         }
-                        if (request.getParameter("numero") != null) {
+                        if (request.getParameter("numero") != null && !request.getParameter("numero").isEmpty()) {
                             propriedadeBean.setNumero(request.getParameter("numero"));
                         }
-                        if (request.getParameter("complemento") != null) {
+                        if (request.getParameter("complemento") != null && !request.getParameter("complemento").isEmpty()) {
                             propriedadeBean.setComplemento(request.getParameter("complemento"));
                         }
-                        if (request.getParameter("telefone") != null) {
+                        if (request.getParameter("telefone") != null && !request.getParameter("telefone").isEmpty()) {
                             propriedadeBean.setTelefone(request.getParameter("telefone"));
                         }
-                        if (request.getParameter("email") != null) {
+                        if (request.getParameter("email") != null && !request.getParameter("email").isEmpty()) {
                             propriedadeBean.setEmail(request.getParameter("email"));
                         }
-                        if (request.getParameter("proprietario") != null) {
+                        if (request.getParameter("proprietario") != null && !request.getParameter("proprietario").isEmpty()) {
                             propriedadeBean.setProprietario(request.getParameter("proprietario"));
                         }
-                        if (request.getParameter("periodicidade") != null) {
+                        if (request.getParameter("periodicidade") != null && !request.getParameter("periodicidade").isEmpty()) {
                             propriedadeBean.setPeriodicidade(Integer.parseInt(request.getParameter("periodicidade")));
                         }
-                        if (request.getParameter("id_estado") != null) {
+                        if (request.getParameter("id_estado") != null && !request.getParameter("id_estado").isEmpty()) {
                             estadoBean.setId(Integer.parseInt(request.getParameter("id_estado")));
                         }
-                        if (request.getParameter("nome_estado") != null) {
+                        if (request.getParameter("nome_estado") != null && !request.getParameter("nome_estado").isEmpty()) {
                             estadoBean.setNome(request.getParameter("nome_estado"));
                         }
-                        if (request.getParameter("sigla") != null) {
+                        if (request.getParameter("sigla") != null && !request.getParameter("sigla").isEmpty()) {
                             estadoBean.setSigla(request.getParameter("sigla"));
                         }
-                        if (request.getParameter("id_cidade") != null) {
+                        if (request.getParameter("id_cidade") != null && !request.getParameter("id_cidade").isEmpty()) {
                             cidadeBean.setId(Integer.parseInt(request.getParameter("id_cidade")));
                         }
-                        if (request.getParameter("nome_cidade") != null) {
+                        if (request.getParameter("nome_cidade") != null && !request.getParameter("nome_cidade").isEmpty()) {
                             cidadeBean.setNome(request.getParameter("nome_cidade"));
                         }
                         cidadeBean.setEstado(estadoBean);
@@ -247,7 +250,7 @@ public class PropriedadeServlet extends HttpServlet {
                     break;
                 case "deletar":
                     try {
-                        if (request.getParameter("id") != null) {
+                        if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
                             propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
                         }
 
@@ -270,7 +273,7 @@ public class PropriedadeServlet extends HttpServlet {
                     break;
                 case "ler":
                     try {
-                        if (request.getParameter("id") != null) {
+                        if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
                             propriedadeBean.setId(Integer.parseInt(request.getParameter("id")));
                             propriedadeBean = propriedadeDAO.buscarPorId(propriedadeBean);
                         }

@@ -40,9 +40,14 @@
       Observação: <input type="text" id="observacao" name="observacao" value="${requestScope.vacaBean.observacao}"/>
       </br>
       Raça: 
-      <select name="id_raca" required>  
-        <c:forEach items="${requestScope.racaBeanList}" var="raca"> 
-          <option value="${raca.id}">${raca.descricao}</option>
+      <select name="id_raca" required>
+        <option value="">--selecione</option>  
+        <c:forEach items="${requestScope.racaBeanList}" var="raca">
+          <c:if test="${requestScope.vacaBean.raca.id} == ${raca.id}">
+            <%! String str = "selected"; %>
+          </c:if> 
+          <option <%=str%> value="${raca.id}">${raca.descricao}</option>
+          <% str=""; %>
         </c:forEach>
       </select>
       </br>

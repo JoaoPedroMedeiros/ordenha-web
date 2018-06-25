@@ -17,6 +17,26 @@
       <input type="hidden" id="acao" name="acao" value="ler"/>
       <input class="btn" type="submit" value="Cadastrar"/>
     </form>
+    <form action="/sistema-coletor/servlets/propriedade" method="get"> 
+    <input type="hidden" id="acao" name="acao" value="listar"/>
+    Nome: <input type="text" id="nome" name="nome" value="${requestScope.propriedadeBean.nome}"/>
+    </br>
+    Cnpj: <input type="text" id="cnpj" name="cnpj" value="${requestScope.propriedadeBean.cnpj}"/>
+    </br>
+    Cidade: 
+    <select name="id_cidade">
+      <option value="">--selecione</option>  
+      <c:forEach items="${requestScope.cidadeBeanList}" var="cidade">
+        <c:if test="${requestScope.propriedadeBean.cidade.id} == ${cidade.id}">
+          <%! String str = "selected"; %>
+        </c:if>
+        <option <%=str%> value="${cidade.id}">${cidade.nome} - ${cidade.estado.sigla}</option>
+        <% str=""; %>
+      </c:forEach>
+    </select>
+    </br>
+    <input class="btn" type="submit" value="Pesquisar"/>
+  </form>
     <div id="conteudo">
     <table width="100%">
       <thead>

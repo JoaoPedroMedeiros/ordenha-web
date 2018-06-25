@@ -19,6 +19,24 @@
     <input type="hidden" id="acao" name="acao" value="ler"/>
     <input class="btn" type="submit" value="Cadastrar"/>
   </form>
+  <form action="/sistema-produtor/servlets/vaca" method="get"> 
+    <input type="hidden" id="acao" name="acao" value="listar"/>
+    Nome: <input type="text" id="nome" name="nome" value="${requestScope.vacaBean.nome}"/>
+    </br>
+    Raça: 
+    <select name="id_raca">
+      <option value="">--selecione</option>  
+      <c:forEach items="${requestScope.racaBeanList}" var="raca">
+        <c:if test="${requestScope.vacaBean.raca.id} == ${raca.id}">
+          <%! String str = "selected"; %>
+        </c:if> 
+        <option <%=str%> value="${raca.id}">${raca.descricao}</option>
+        <% str=""; %>
+      </c:forEach>
+    </select>
+    </br>
+    <input class="btn" type="submit" value="Pesquisar"/>
+  </form>
   <div id="conteudo">
       <table width="100%">
         <thead>

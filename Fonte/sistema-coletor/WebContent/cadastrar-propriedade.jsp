@@ -34,9 +34,14 @@
       </br>
       Bairro: <input type="text" id="bairro" name="bairro" value="${requestScope.propriedadeBean.bairro}" required/>
       </br>
-      <select name="id_cidade" required>  
-        <c:forEach items="${requestScope.cidadeBeanList}" var="cidade"> 
-          <option value="${cidade.id}">${cidade.nome}</option>
+      <select name="id_cidade" required>
+        <option value="">--selecione</option>  
+        <c:forEach items="${requestScope.cidadeBeanList}" var="cidade">
+          <c:if test="${requestScope.propriedadeBean.cidade.id} == ${cidade.id}">
+            <%! String str = "selected"; %>
+          </c:if> 
+          <option <%=str%> value="${cidade.id}">${cidade.nome} - ${cidade.estado.sigla}</option>
+          <% str=""; %>
         </c:forEach>
       </select>
       Proprietário: <input type="text" id="proprietario" name="proprietario" value="${requestScope.propriedadeBean.proprietario}" required/>
