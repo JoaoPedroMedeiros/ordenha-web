@@ -27,7 +27,7 @@ public class VacaDAO implements CrudDAO<VacaBean> {
                     + "nome, "
                     + "data_nascimento, "
                     + "peso, "
-//                    + "doente, "
+//                    + "doente, " 
 //                    + "prenha, "
                     + "observacao) "
                     + "VALUES (?, ?, ?, ?, ?)";

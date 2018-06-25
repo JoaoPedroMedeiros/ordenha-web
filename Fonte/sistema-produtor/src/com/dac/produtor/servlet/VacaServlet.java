@@ -37,7 +37,7 @@ public class VacaServlet extends HttpServlet {
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     *      response)
+     *      response) 
      */
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

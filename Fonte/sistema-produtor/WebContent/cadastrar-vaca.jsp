@@ -41,7 +41,7 @@
       </br>
       Raça: 
       <select name="id_raca">  
-        <c:forEach items="${requestScope.racaBeanList}" var="raca">
+        <c:forEach items="${requestScope.racaBeanList}" var="raca"> 
           <option value="${raca.id}">${raca.descricao}</option>
         </c:forEach>
       </select>

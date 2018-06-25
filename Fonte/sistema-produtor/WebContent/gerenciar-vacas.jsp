@@ -15,7 +15,7 @@
     <h1 class="body">Fazenda
       ${sessionScope.usuario.propriedade.nome}</h1>
   </div>
-  <form action="/sistema-produtor/servlets/vaca" method="post">
+  <form action="/sistema-produtor/servlets/vaca" method="post"> 
     <input type="hidden" id="acao" name="acao" value="ler"/>
     <input class="btn" type="submit" value="Cadastrar"/>
   </form>
