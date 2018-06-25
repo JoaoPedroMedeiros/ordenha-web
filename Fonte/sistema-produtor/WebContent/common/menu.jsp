@@ -18,7 +18,7 @@
         <li><a href="" class="menu-btn"><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
         <li><a href="/sistema-produtor/servlets/movimento-tanque" class="menu-btn"><i class="fa fa-calendar-o" aria-hidden="true"></i> Linha do tempo</a></li>
         <li><a href="/sistema-produtor/cadastro-ordenha.jsp" class="menu-btn"><i class="fa fa-plus" aria-hidden="true"></i> Cadastrar Ordenha</a></li>
-        <li><a href="/sistema-produtor/servlets/vaca" class="menu-btn"><i class="fa fa-clipboard" aria-hidden="true"></i> Gerenciar vacas</a></li>
+        <li><a href="/sistema-produtor/servlets/vaca?acao=listar" class="menu-btn"><i class="fa fa-clipboard" aria-hidden="true"></i> Gerenciar vacas</a></li>
         <li><a href="/sistema-produtor/servlets/logout" class="menu-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></li>
     </ul>
 </nav>
