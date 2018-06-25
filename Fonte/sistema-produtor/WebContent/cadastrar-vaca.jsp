@@ -27,20 +27,20 @@
               <input type="hidden" id="acao" name="acao" value="inserir"/>
           </c:otherwise>
       </c:choose>
-      Nome: <input type="text" id="nome" name="nome" value="${requestScope.vacaBean.nome}"/>
+      Nome: <input type="text" id="nome" name="nome" value="${requestScope.vacaBean.nome}" required/>
       </br>
       <fmt:formatDate value="${requestScope.vacaBean.dataNascimento}"  
                 type="date" 
                 pattern="dd/MM/yyyy"
                 var="theFormattedDate" />
-      Data Nascimento: <input type="text" id="data_nascimento" name="data_nascimento" value="${theFormattedDate}"/>
+      Data Nascimento: <input type="text" id="data_nascimento" name="data_nascimento" value="${theFormattedDate}" required/>
       </br>
-      Peso: <input type="text" id="peso" name="peso" value="${requestScope.vacaBean.peso}"/>
+      Peso: <input type="text" id="peso" name="peso" value="${requestScope.vacaBean.peso}" required/>
       </br>
       Observação: <input type="text" id="observacao" name="observacao" value="${requestScope.vacaBean.observacao}"/>
       </br>
       Raça: 
-      <select name="id_raca">  
+      <select name="id_raca" required>  
         <c:forEach items="${requestScope.racaBeanList}" var="raca"> 
           <option value="${raca.id}">${raca.descricao}</option>
         </c:forEach>

@@ -22,30 +22,30 @@
               <input type="hidden" id="acao" name="acao" value="inserir"/>
           </c:otherwise>
       </c:choose>
-      Nome: <input type="text" id="nome" name="nome" value="${requestScope.propriedadeBean.nome}"/>
+      Nome: <input type="text" id="nome" name="nome" value="${requestScope.propriedadeBean.nome}" required/>
       </br>
-      Cnpj: <input type="text" id="cnpj" name="cnpj" value="${requestScope.propriedadeBean.cnpj}"/>
+      Cnpj: <input type="text" id="cnpj" name="cnpj" value="${requestScope.propriedadeBean.cnpj}" required/>
       </br>
-      Endereco: <input type="text" id="endereco" name="endereco" value="${requestScope.propriedadeBean.endereco}"/>
+      Endereco: <input type="text" id="endereco" name="endereco" value="${requestScope.propriedadeBean.endereco}" required/>
       </br>
-      Numero: <input type="text" id="numero" name="numero" value="${requestScope.propriedadeBean.numero}"/>
+      Numero: <input type="text" id="numero" name="numero" value="${requestScope.propriedadeBean.numero}" required/>
       </br>
       Complemento: <input type="text" id="complemento" name="complemento" value="${requestScope.propriedadeBean.complemento}"/>
       </br>
-      Bairro: <input type="text" id="bairro" name="bairro" value="${requestScope.propriedadeBean.bairro}"/>
+      Bairro: <input type="text" id="bairro" name="bairro" value="${requestScope.propriedadeBean.bairro}" required/>
       </br>
-      <select name="id_cidade">  
+      <select name="id_cidade" required>  
         <c:forEach items="${requestScope.cidadeBeanList}" var="cidade"> 
           <option value="${cidade.id}">${cidade.nome}</option>
         </c:forEach>
       </select>
-      Proprietário: <input type="text" id="proprietario" name="proprietario" value="${requestScope.propriedadeBean.proprietario}"/>
+      Proprietário: <input type="text" id="proprietario" name="proprietario" value="${requestScope.propriedadeBean.proprietario}" required/>
       </br>
-      Telefone: <input type="text" id="telefone" name="telefone" value="${requestScope.propriedadeBean.telefone}"/>
+      Telefone: <input type="text" id="telefone" name="telefone" value="${requestScope.propriedadeBean.telefone}" required/>
       </br>
-      Email: <input type="text" id="email" name="email" value="${requestScope.propriedadeBean.email}"/>
+      Email: <input type="text" id="email" name="email" value="${requestScope.propriedadeBean.email}" required/>
       </br>
-      Periodicidade: <input type="text" id="periodicidade" name="periodicidade" value="${requestScope.propriedadeBean.periodicidade}"/>
+      Periodicidade: <input type="text" id="periodicidade" name="periodicidade" value="${requestScope.propriedadeBean.periodicidade}" required/>
       </br>
       <input class="btn" type="submit" value="Salvar" />
     </form>
